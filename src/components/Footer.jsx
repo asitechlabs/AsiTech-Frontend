@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <footer className="bg-white text-gray-700 border-t border-gray-200">
 
-      <div className="max-w-7xl mx-auto px-6 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
 
         {/* GRID */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
@@ -47,7 +47,7 @@ const Footer = () => {
           <div>
             <h4 className="text-gray-900 font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-3 text-sm text-gray-600">
-              {['Home', 'About', 'Features', 'Tools', 'Contact'].map((item) => (
+              {['Home', 'About', 'Features', 'Tools','Career', 'Contact'].map((item) => (
                 <li key={item}>
                   <a
                     href={`#${item.toLowerCase()}`}

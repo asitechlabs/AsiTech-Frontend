@@ -1,42 +1,51 @@
 import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-const sections = ["home", "features", "tools", "about", "contact"];
+const sections = ["home", "about","features", "tools", "career", "contact"];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
-  // Scroll progress + navbar background
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      const scrollTop = window.scrollY;
+      const height = document.body.scrollHeight - window.innerHeight;
+
+      setScrolled(scrollTop > 20);
+      setScrollProgress((scrollTop / height) * 100);
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
-  // Active section tracking
-  useEffect(() => {
-    const observers = [];
+    // Scroll Spy Logic
+    const observerOptions = {
+      root: null,
+      rootMargin: "-20% 0px -70% 0px", // Detect when section is roughly in the top part of the viewport
+      threshold: 0,
+    };
 
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
 
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(id);
-        },
-        { threshold: 0.55, rootMargin: "-80px 0px 0px 0px" }
-      );
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-      observer.observe(el);
-      observers.push(observer);
+    sections.forEach((section) => {
+      const element = document.getElementById(section);
+      if (element) observer.observe(element);
     });
 
-    return () => observers.forEach((obs) => obs.disconnect());
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   const handleNavClick = (id) => {
@@ -45,76 +54,82 @@ const Navbar = () => {
     setActiveSection(id);
   };
 
-  const navClass = (id) =>
-    `relative cursor-pointer transition-all duration-300 ${
-      activeSection === id
-        ? "text-blue-600 font-semibold"
-        : "text-gray-600 hover:text-blue-600"
-    }`;
-
   return (
     <>
-      {/* Scroll progress bar */}
-      <div className="fixed top-0 left-0 h-0.75 bg-blue-600 z-60 transition-all"
-        style={{
-          width: `${(window.scrollY /
-            (document.body.scrollHeight - window.innerHeight)) * 100}%`
-        }}
+      {/* Progress bar */}
+      <motion.div
+        className="fixed top-0 left-0 h-1 bg-blue-600 z-[99999]"
+        initial={{ width: 0 }}
+        animate={{ width: `${scrollProgress}%` }}
+        transition={{ type: "spring", stiffness: 100, damping: 20 }}
       />
 
+      {/* NAVBAR */}
       <nav
-        className={`fixed w-full z-50 top-0 transition-all duration-300 ${
+        className={`fixed top-0 left-0 w-full z-[99998] transition-all duration-300 ${
           scrolled
-            ? "bg-white/70 backdrop-blur-xl shadow-md"
-            : "bg-white/40 backdrop-blur-md"
-        } border-b border-gray-100`}
+            ? "bg-white/90 backdrop-blur-xl shadow-md py-2"
+            : "bg-white/60 backdrop-blur-md py-4"
+        }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16 items-center">
+          <div className="flex items-center justify-between h-16">
 
             {/* Logo */}
-            <button onClick={() => handleNavClick("home")} className="flex items-center gap-2">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => handleNavClick("home")}
+              className="flex items-center gap-2"
+            >
               <img
                 src="/src/assets/logo.png"
-                alt="Logo"
-                className="h-10 md:h-12 cursor-pointer hover:scale-105 transition"
+                className="h-9 sm:h-10 md:h-12"
+                alt="logo"
               />
-              <span className="text-2xl font-bold cursor-pointer text-gray-900">
-                AsiTech
+              <span className="text-lg sm:text-xl font-bold">
+                ASI TECH
               </span>
-            </button>
+            </motion.button>
 
-            {/* Desktop Menu */}
-            <div className="hidden md:flex space-x-8 items-center text-sm font-medium">
-
-              {sections.slice(0, 4).map((sec) => (
+            {/* Desktop menu */}
+            <div className="hidden md:flex gap-8 text-sm font-medium ">
+              {sections.slice(0, 5).map((sec) => (
                 <button
                   key={sec}
                   onClick={() => handleNavClick(sec)}
-                  className={navClass(sec)}
+                  className={`relative text-gray-700 hover:text-blue-600 transition-colors duration-300 ${
+                    activeSection === sec ? "text-blue-600" : ""
+                  }`}
                 >
                   {sec.charAt(0).toUpperCase() + sec.slice(1)}
-
-                  {/* active underline animation */}
                   {activeSection === sec && (
-                    <span className="absolute left-0 -bottom-1 w-full h-0.5 bg-blue-600 rounded-full animate-pulse" />
+                    <motion.div
+                      layoutId="activeTab"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-blue-600"
+                    />
                   )}
                 </button>
               ))}
 
-              {/* CTA Button */}
-              <button
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => handleNavClick("contact")}
-                className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition hover:scale-105 active:scale-95"
+                className={`px-4 py-2 rounded-lg shadow-md transition-colors duration-300 ${
+                  activeSection === "contact"
+                    ? "bg-blue-700 text-white ring-2 ring-blue-300"
+                    : "bg-blue-600 text-white"
+                }`}
               >
                 Contact
-              </button>
+              </motion.button>
             </div>
 
-            {/* Mobile Toggle */}
+            {/* Mobile button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden text-2xl text-gray-700"
+              className="md:hidden text-2xl z-100000"
             >
               {isOpen ? "✕" : "☰"}
             </button>
@@ -122,24 +137,35 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu (animated) */}
-      <div
-        className={`fixed top-16 left-0 w-full bg-white border-b shadow-lg md:hidden transition-all duration-300 ${
-          isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-5 pointer-events-none"
-        }`}
-      >
-        <div className="flex flex-col p-6 space-y-4 text-gray-700">
-          {sections.map((sec) => (
-            <button
-              key={sec}
-              onClick={() => handleNavClick(sec)}
-              className="text-left hover:text-blue-600 transition"
-            >
-              {sec.charAt(0).toUpperCase() + sec.slice(1)}
-            </button>
-          ))}
-        </div>
-      </div>
+      {/* MOBILE MENU */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="fixed top-16 left-0 w-full bg-white shadow-xl md:hidden z-[99997] overflow-y-auto max-h-[calc(100vh-64px)]"
+          >
+            <div className="flex flex-col p-6 space-y-4">
+              {sections.map((sec) => (
+                <motion.button
+                  key={sec}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 }}
+                  onClick={() => handleNavClick(sec)}
+                  className={`text-left text-lg py-2 border-b border-gray-100 transition-colors ${
+                    activeSection === sec ? "text-blue-600 font-bold" : "text-gray-700"
+                  }`}
+                >
+                  {sec.charAt(0).toUpperCase() + sec.slice(1)}
+                </motion.button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

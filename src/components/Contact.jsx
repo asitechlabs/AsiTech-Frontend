@@ -46,7 +46,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="relative py-24 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-white to-gray-100"
+      className="relative py-2 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-white to-gray-300"
     >
 
       {/* Background glow */}
@@ -58,7 +58,7 @@ const Contact = () => {
       <div className="relative max-w-6xl mx-auto">
 
         {/* Heading */}
-        <div className="text-center mb-14">
+        <div className="text-center mb-4">
           <span className="text-xs font-semibold tracking-widest text-blue-600 bg-blue-50 px-4 py-1 rounded-full uppercase">
             Contact Us
           </span>
@@ -81,6 +81,7 @@ const Contact = () => {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
             className="bg-white/70 backdrop-blur-xl border border-gray-200 shadow-xl rounded-2xl p-6 sm:p-10"
           >
             <h3 className="text-xl font-semibold text-center mb-6">
@@ -88,54 +89,66 @@ const Contact = () => {
             </h3>
 
             <form onSubmit={handleSubmit} className="space-y-5">
+              {[
+                { type: 'text', placeholder: 'Your Name', value: 'name' },
+                { type: 'email', placeholder: 'Your Email', value: 'email' },
+              ].map((field, i) => (
+                <motion.div
+                  key={field.value}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * i }}
+                >
+                  <input
+                    type={field.type}
+                    placeholder={field.placeholder}
+                    value={formData[field.value]}
+                    onChange={(e) =>
+                      setFormData({ ...formData, [field.value]: e.target.value })
+                    }
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-100 outline-none transition-all"
+                    required
+                  />
+                </motion.div>
+              ))}
 
-              <input
-                type="text"
-                placeholder="Your Name"
-                value={formData.name}
-                onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
-                }
-                className="w-full px-4 py-3 border rounded-xl focus:ring-4 focus:ring-blue-100 outline-none"
-                required
-              />
-
-              <input
-                type="email"
-                placeholder="Your Email"
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-                className="w-full px-4 py-3 border rounded-xl focus:ring-4 focus:ring-blue-100 outline-none"
-                required
-              />
-
-              <textarea
-                rows="5"
-                placeholder="Your Message"
-                value={formData.message}
-                onChange={(e) =>
-                  setFormData({ ...formData, message: e.target.value })
-                }
-                className="w-full px-4 py-3 border rounded-xl resize-none focus:ring-4 focus:ring-blue-100 outline-none"
-                required
-              />
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                <textarea
+                  rows="5"
+                  placeholder="Your Message"
+                  value={formData.message}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl resize-none focus:ring-4 focus:ring-blue-100 outline-none transition-all"
+                  required
+                />
+              </motion.div>
 
               {/* Status */}
               {status && (
-                <p className="text-center text-sm font-medium text-blue-600">
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-center text-sm font-medium text-blue-600"
+                >
                   {status}
-                </p>
+                </motion.p>
               )}
 
-              <button
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition"
+                className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition shadow-lg"
               >
                 <FiSend />
                 Send Message
-              </button>
+              </motion.button>
             </form>
           </motion.div>
 
@@ -144,13 +157,14 @@ const Contact = () => {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
             className="w-full"
           >
-            <div className="w-full h-112.5 rounded-2xl overflow-hidden shadow-lg border border-gray-200">
+            <div className="w-full h-[300px] sm:h-[400px] lg:h-full min-h-[400px] rounded-2xl overflow-hidden shadow-lg border border-gray-200">
               <iframe
                 title="Company Location Map"
                 src={mapSrc}
-                className="w-full h-full"
+                className="w-full h-full grayscale hover:grayscale-0 transition-all duration-700"
                 loading="lazy"
                 allowFullScreen
                 referrerPolicy="no-referrer-when-downgrade"

@@ -4,6 +4,7 @@ import Features from "./components/Features";
 import ToolsSection from "./components/ToolsSection";
 import About from "./components/About";
 import Contact from "./components/Contact";
+import Career from "./components/Career";
 import Footer from "./components/Footer";
 
 const App = () => {
@@ -14,6 +15,9 @@ const App = () => {
       <section id="home" className="pt-20">
         <Hero />
       </section>
+       <section id="about" className="pt-20">
+        <About />
+      </section>
 
       <section id="features" className="pt-20">
         <Features />
@@ -23,8 +27,10 @@ const App = () => {
         <ToolsSection />
       </section>
 
-      <section id="about" className="pt-20">
-        <About />
+     
+
+      <section id="career" className="pt-20">
+        <Career />
       </section>
 
       <section id="contact" className="pt-20">

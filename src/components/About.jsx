@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const cards = [
   {
@@ -25,13 +26,18 @@ const About = () => {
   return (
     <section
       id="about"
-      className="bg-linear-to-b from-white to-gray-100 py-24 px-6"
+      className="bg-linear-to-b from-white to-gray-300 py-2 px-6"
     >
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}
-        <div className="text-center mb-16">
-
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
           <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
             <span className="bg-linear-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
               About AsiTech
@@ -46,17 +52,19 @@ const About = () => {
             <span className="text-indigo-600 font-semibold">AI integration</span>,
             empowering businesses to scale globally.
           </p>
-        </div>
+        </motion.div>
 
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-
           {cards.map((card, index) => (
-            <div
+            <motion.div
               key={index}
-              className="group relative p-8 rounded-2xl border border-gray-200 bg-white/60 backdrop-blur-xl shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              className="group relative p-6 sm:p-8 rounded-2xl border border-gray-200 bg-white/60 backdrop-blur-xl shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden"
             >
-
               {/* Glow background */}
               <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-linear-to-br ${card.bg} rounded-2xl`} />
 
@@ -74,12 +82,9 @@ const About = () => {
               <p className="text-gray-600 text-sm leading-relaxed relative z-10">
                 {card.desc}
               </p>
-
-            </div>
+            </motion.div>
           ))}
-
         </div>
-
       </div>
     </section>
   );

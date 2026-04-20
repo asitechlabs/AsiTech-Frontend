@@ -8,18 +8,18 @@ const ToolsSection = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
+        staggerChildren: 0.1,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { y: 40, opacity: 0 },
+    hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.6,
+        duration: 0.5,
         ease: "easeOut",
       },
     },
@@ -28,7 +28,7 @@ const ToolsSection = () => {
   return (
     <section
       id="tools"
-      className="py-20 bg-linear-to-b from-white to-gray-100 overflow-hidden"
+      className="py-2 bg-linear-to-b from-white to-gray-300 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto px-6">
 
@@ -42,16 +42,22 @@ const ToolsSection = () => {
           Tools We Use
         </motion.h2>
 
-        <p className="text-center text-gray-500 mb-12 max-w-2xl mx-auto">
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="text-center text-gray-500 mb-12 max-w-2xl mx-auto"
+        >
           A modern tech stack powering scalable applications, intelligent systems, and seamless user experiences.
-        </p>
+        </motion.p>
 
         {/* Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.1 }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
         >
           {toolUsed.map((tool) => (
@@ -59,10 +65,10 @@ const ToolsSection = () => {
               key={tool.name}
               variants={itemVariants}
               whileHover={{
-                scale: 1.05,
-                boxShadow: "0px 15px 40px rgba(0,0,0,0.12)",
+                y: -10,
+                transition: { duration: 0.3 }
               }}
-              className="relative group p-6 rounded-2xl border border-gray-200 bg-white/60 backdrop-blur-xl transition-all duration-300 overflow-hidden"
+              className="relative group p-4 sm:p-6 rounded-2xl border border-gray-200 bg-white/60 backdrop-blur-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden break-words cursor-default"
             >
 
               {/* Glow background effect */}
