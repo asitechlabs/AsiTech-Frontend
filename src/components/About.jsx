@@ -29,7 +29,6 @@ const About = () => {
       className="bg-linear-to-b from-white to-gray-300 py-2 px-6"
     >
       <div className="max-w-6xl mx-auto">
-
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -45,17 +44,21 @@ const About = () => {
           </h2>
 
           <p className="text-lg text-gray-500 max-w-3xl mx-auto leading-relaxed">
-            Bridging the gap between complex problems and innovative digital solutions.
-            We specialize in{' '}
-            <span className="text-blue-600 font-semibold">cutting-edge software development</span>
-            {' '}and{' '}
-            <span className="text-indigo-600 font-semibold">AI integration</span>,
-            empowering businesses to scale globally.
+            Bridging the gap between complex problems and innovative digital
+            solutions. We specialize in{' '}
+            <span className="text-blue-600 font-semibold">
+              cutting-edge software development
+            </span>{' '}
+            and{' '}
+            <span className="text-indigo-600 font-semibold">
+              AI integration
+            </span>
+            , empowering businesses to scale globally.
           </p>
         </motion.div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-4">
           {cards.map((card, index) => (
             <motion.div
               key={index}
@@ -66,7 +69,9 @@ const About = () => {
               className="group relative p-6 sm:p-8 rounded-2xl border border-gray-200 bg-white/60 backdrop-blur-xl shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden"
             >
               {/* Glow background */}
-              <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-linear-to-br ${card.bg} rounded-2xl`} />
+              <div
+                className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-linear-to-br ${card.bg} rounded-2xl`}
+              />
 
               {/* Emoji */}
               <div className="text-4xl mb-5 relative z-10 group-hover:scale-110 transition-transform duration-300">
