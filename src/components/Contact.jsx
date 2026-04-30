@@ -4,42 +4,35 @@ import { FiSend } from 'react-icons/fi';
 import emailjs from '@emailjs/browser';
 
 const Contact = () => {
+  // Form state
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
-    message: '',
+    message: ''
   });
 
+  // Status
   const [status, setStatus] = useState('');
 
+  // Handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
     setStatus('Sending...');
 
-    const serviceID = 'service_v46keqo';
-    const templateID = 'template_eyf54tc';
-    const publicKey = 'AtoLUlc898Wti45To';
+    const serviceID = "service_v46keqo";
+    const templateID = "template_eyf54tc";
+    const publicKey = "AtoLUlc898Wti45To";
 
     const templateParams = {
       name: formData.name,
       email: formData.email,
-      phone: formData.phone, // ✅ included
-      message: formData.message,
+      message: formData.message
     };
 
-    emailjs
-      .send(serviceID, templateID, templateParams, publicKey)
+    emailjs.send(serviceID, templateID, templateParams, publicKey)
       .then(() => {
         setStatus('Sent successfully! 🎉');
-
-        // ✅ proper reset
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          message: '',
-        });
+        setFormData({ name: '', email: '', message: '' });
       })
       .catch((error) => {
         console.error(error);
@@ -47,14 +40,15 @@ const Contact = () => {
       });
   };
 
+  // Google Map link
   const mapSrc =
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4486.301677318353!2d85.29848507105801!3d27.67212832306894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xaa4ab8369e1e172d%3A0xc8cd87e8ab9e1ada!2sASI%20logistics!5e0!3m2!1sen!2snp!4v1776417494418!5m2!1sen!2snp';
-
+"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4486.301677318353!2d85.29848507105801!3d27.67212832306894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xaa4ab8369e1e172d%3A0xc8cd87e8ab9e1ada!2sASI%20logistics!5e0!3m2!1sen!2snp!4v1776417494418!5m2!1sen!2snp" 
   return (
     <section
       id="contact"
-      className="relative py-2 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-white to-gray-300 pb-7"
+      className="relative py-2 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-white to-gray-300"
     >
+
       {/* Background glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-32 -left-32 w-72 h-72 bg-blue-200 blur-3xl opacity-30 rounded-full" />
@@ -62,6 +56,7 @@ const Contact = () => {
       </div>
 
       <div className="relative max-w-6xl mx-auto">
+
         {/* Heading */}
         <div className="text-center mb-4">
           <span className="text-xs font-semibold tracking-widest text-blue-600 bg-blue-50 px-4 py-1 rounded-full uppercase">
@@ -73,12 +68,14 @@ const Contact = () => {
           </h2>
 
           <p className="text-gray-600 mt-4 max-w-2xl mx-auto text-sm sm:text-base">
-            Share your idea, requirements, or collaboration request. We build
-            modern and scalable digital solutions.
+            Share your idea, requirements, or collaboration request.
+            We build modern and scalable digital solutions.
           </p>
         </div>
 
+        {/* Form + Map */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+
           {/* FORM */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -92,15 +89,9 @@ const Contact = () => {
             </h3>
 
             <form onSubmit={handleSubmit} className="space-y-5">
-              {/* Inputs */}
               {[
                 { type: 'text', placeholder: 'Your Name', value: 'name' },
                 { type: 'email', placeholder: 'Your Email', value: 'email' },
-                {
-                  type: 'tel',
-                  placeholder: 'Your Phone Number',
-                  value: 'phone',
-                },
               ].map((field, i) => (
                 <motion.div
                   key={field.value}
@@ -113,10 +104,7 @@ const Contact = () => {
                     placeholder={field.placeholder}
                     value={formData[field.value]}
                     onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        [field.value]: e.target.value,
-                      })
+                      setFormData({ ...formData, [field.value]: e.target.value })
                     }
                     className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-100 outline-none transition-all"
                     required
@@ -124,7 +112,6 @@ const Contact = () => {
                 </motion.div>
               ))}
 
-              {/* Message */}
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -153,7 +140,6 @@ const Contact = () => {
                 </motion.p>
               )}
 
-              {/* Button */}
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -185,6 +171,7 @@ const Contact = () => {
               />
             </div>
           </motion.div>
+
         </div>
       </div>
     </section>

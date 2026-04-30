@@ -1,37 +1,37 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Cpu, Globe, ShieldCheck, BarChart3, Cloud, Zap } from 'lucide-react';
+import React from "react";
+import { motion } from "framer-motion";
+import { Cpu, Globe, ShieldCheck, BarChart3, Cloud, Zap } from "lucide-react";
 
 const features = [
   {
     icon: <Cpu size={28} />,
-    title: 'AI Integration',
-    desc: 'Leverage intelligent systems to automate processes and deliver smarter user experiences.',
+    title: "AI Integration",
+    desc: "Leverage intelligent systems to automate processes and deliver smarter user experiences.",
   },
   {
     icon: <Globe size={28} />,
-    title: 'Web Development',
-    desc: 'Responsive, scalable, and high-performance web applications tailored to your business.',
+    title: "Web Development",
+    desc: "Responsive, scalable, and high-performance web applications tailored to your business.",
   },
   {
     icon: <ShieldCheck size={28} />,
-    title: 'Security First',
-    desc: 'We implement industry-grade security practices to protect your data and infrastructure.',
+    title: "Security First",
+    desc: "We implement industry-grade security practices to protect your data and infrastructure.",
   },
   {
     icon: <BarChart3 size={28} />,
-    title: 'Data Analytics',
-    desc: 'Transform data into actionable insights with powerful analytics and visualization tools.',
+    title: "Data Analytics",
+    desc: "Transform data into actionable insights with powerful analytics and visualization tools.",
   },
   {
     icon: <Cloud size={28} />,
-    title: 'Cloud Solutions',
-    desc: 'Deploy and scale your applications seamlessly using modern cloud technologies.',
+    title: "Cloud Solutions",
+    desc: "Deploy and scale your applications seamlessly using modern cloud technologies.",
   },
   {
     icon: <Zap size={28} />,
-    title: 'Fast Performance',
-    desc: 'Optimized systems ensuring lightning-fast load times and smooth user experiences.',
+    title: "Fast Performance",
+    desc: "Optimized systems ensuring lightning-fast load times and smooth user experiences.",
   },
 ];
 
@@ -52,16 +52,14 @@ const Features = () => {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { duration: 0.6, ease: 'easeOut' },
+      transition: { duration: 0.6, ease: "easeOut" },
     },
   };
 
   return (
-    <section
-      id="features"
-      className="bg-linear-to-b from-white to-gray-300 py-2 px-6"
-    >
-      <div className="max-w-7xl mx-auto text-center pb-4">
+    <section id="features" className="bg-linear-to-b from-white to-gray-300 py-2 px-6">
+      <div className="max-w-7xl mx-auto text-center">
+
         {/* Badge */}
         <motion.span
           initial={{ opacity: 0, y: -10 }}

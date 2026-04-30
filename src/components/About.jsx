@@ -48,19 +48,6 @@ const About = () => {
             </span>
           </h2>
 
-<<<<<<< HEAD
-          <p className="text-lg text-gray-500 max-w-3xl mx-auto leading-relaxed">
-            Bridging the gap between complex problems and innovative digital
-            solutions. We specialize in{' '}
-            <span className="text-blue-600 font-semibold">
-              cutting-edge software development
-            </span>{' '}
-            and{' '}
-            <span className="text-indigo-600 font-semibold">
-              AI integration
-            </span>
-            , empowering businesses to scale globally.
-=======
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Bridging the gap between complex problems and innovative digital solutions.
             We specialize in{' '}
@@ -68,27 +55,10 @@ const About = () => {
             {' '}and{' '}
             <span className="text-indigo-600 font-semibold">AI integration</span>,
             empowering businesses to scale globally.
->>>>>>> 76a30178d732f09251300d5828c70c8583b257a6
           </p>
         </motion.div>
 
         {/* Cards */}
-<<<<<<< HEAD
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-4">
-          {cards.map((card, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="group relative p-6 sm:p-8 rounded-2xl border border-gray-200 bg-white/60 backdrop-blur-xl shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden"
-            >
-              {/* Glow background */}
-              <div
-                className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-linear-to-br ${card.bg} rounded-2xl`}
-              />
-=======
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {cards.map((card, index) => {
             const IconComponent = card.icon;
@@ -103,7 +73,6 @@ const About = () => {
               >
                 {/* Glow background */}
                 <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 bg-gradient-to-br ${card.bg} rounded-2xl`} />
->>>>>>> 76a30178d732f09251300d5828c70c8583b257a6
 
                 {/* Icon */}
                 <div className="w-16 h-16 mx-auto mb-6 p-4 bg-white/80 rounded-2xl shadow-lg group-hover:shadow-xl transition-all duration-300 relative z-10 group-hover:scale-110">

@@ -20,7 +20,7 @@ const ToolsSection = () => {
       opacity: 1,
       transition: {
         duration: 0.5,
-        ease: 'easeOut',
+        ease: "easeOut",
       },
     },
   };
@@ -28,9 +28,10 @@ const ToolsSection = () => {
   return (
     <section
       id="tools"
-      className="py-2 bg-linear-to-b from-white to-gray-300 overflow-hidden pb-6"
+      className="py-2 bg-linear-to-b from-white to-gray-300 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto px-6">
+
         {/* Title */}
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
@@ -48,8 +49,7 @@ const ToolsSection = () => {
           transition={{ delay: 0.2 }}
           className="text-center text-gray-500 mb-12 max-w-2xl mx-auto"
         >
-          A modern tech stack powering scalable applications, intelligent
-          systems, and seamless user experiences.
+          A modern tech stack powering scalable applications, intelligent systems, and seamless user experiences.
         </motion.p>
 
         {/* Grid */}
@@ -66,10 +66,11 @@ const ToolsSection = () => {
               variants={itemVariants}
               whileHover={{
                 y: -10,
-                transition: { duration: 0.3 },
+                transition: { duration: 0.3 }
               }}
-              className="relative group p-4 sm:p-6 rounded-2xl border border-gray-200 bg-white/60 backdrop-blur-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden wrap-break-word cursor-default"
+              className="relative group p-4 sm:p-6 rounded-2xl border border-gray-200 bg-white/60 backdrop-blur-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden break-words cursor-default"
             >
+
               {/* Glow background effect */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-linear-to-br from-blue-500/10 via-transparent to-purple-500/10 rounded-2xl" />
 
@@ -92,6 +93,7 @@ const ToolsSection = () => {
               <p className="text-gray-600 text-sm mt-4 leading-relaxed relative z-10">
                 {tool.description}
               </p>
+
             </motion.div>
           ))}
         </motion.div>
