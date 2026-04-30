@@ -163,7 +163,7 @@ const Hero = () => {
               backgroundClip: "text",
             }}
           >
-            AsiTech
+            ASITech
           </span>
         </motion.h1>
 
@@ -267,50 +267,6 @@ const Hero = () => {
           >
             Start a Project
           </motion.button>
-        </motion.div>
-
-        {/* Trust bar */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "2rem",
-            marginTop: "3.5rem",
-            flexWrap: "wrap",
-          }}
-        >
-          {[
-            { num: "50+", label: "Projects Delivered" },
-            { num: "15+", label: "Clients Worldwide" },
-            { num: "3+", label: "Years of Excellence" },
-          ].map((stat) => (
-            <div key={stat.num} style={{ textAlign: "center" }}>
-              <div
-                style={{
-                  fontSize: "1.375rem",
-                  fontWeight: 700,
-                  color: "#fff",
-                  letterSpacing: "-0.03em",
-                }}
-              >
-                {stat.num}
-              </div>
-              <div
-                style={{
-                  fontSize: "0.75rem",
-                  color: "rgba(148,163,184,0.8)",
-                  marginTop: "2px",
-                  letterSpacing: "0.03em",
-                }}
-              >
-                {stat.label}
-              </div>
-            </div>
-          ))}
         </motion.div>
       </div>
 
