@@ -11,7 +11,11 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+<<<<<<< HEAD
     "@hookform/resolvers": "^5.2.2",
+=======
+    "@heroicons/react": "^2.2.0",
+>>>>>>> 76a30178d732f09251300d5828c70c8583b257a6
     "@tailwindcss/vite": "^4.2.2",
     "framer-motion": "^12.38.0",
     "lucide-react": "^1.8.0",

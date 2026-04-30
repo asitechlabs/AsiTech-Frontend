@@ -47,12 +47,42 @@ const App = () => {
         />
       </Route>
 
+<<<<<<< HEAD
       {/* 🔐 AUTH PAGES (NO Navbar/Footer) */}
       <Route path="/" element={<AuthLayout />}>
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
       </Route>
     </Routes>
+=======
+      <section id="home" className="pt-20">
+        <Hero />
+      </section>
+       <section id="about" className="pt-20">
+        <About />
+      </section>
+
+      <section id="features" className="pt-20">
+        <Features />
+      </section>
+
+      <section id="tools" className="pt-20">
+        <ToolsSection />
+      </section>
+
+     
+
+      {/* <section id="career" className="pt-20">
+        <Career />
+      </section> */}
+
+      <section id="contact" className="pt-20">
+        <Contact />
+      </section>
+
+      <Footer />
+    </>
+>>>>>>> 76a30178d732f09251300d5828c70c8583b257a6
   );
 };
 

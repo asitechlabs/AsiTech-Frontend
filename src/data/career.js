@@ -11,7 +11,7 @@ const jobsData = [
     title: "Backend Developer",
     type: "Full Time",
     location: "Kathmandu",
-    deadline: "2026-04-15", // expired
+    deadline: "2026-04-28", // expired
   },
   {
     id: 3,

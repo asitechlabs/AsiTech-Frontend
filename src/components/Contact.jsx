@@ -178,7 +178,7 @@ const Contact = () => {
               <iframe
                 title="Company Location Map"
                 src={mapSrc}
-                className="w-full h-full grayscale hover:grayscale-0 transition-all duration-700"
+                className="w-full h-full transition-all duration-700"
                 loading="lazy"
                 allowFullScreen
                 referrerPolicy="no-referrer-when-downgrade"
