@@ -185,7 +185,6 @@ const Hero = ({ theme }) => {
               fontWeight: 800,
             }}
           >
-            ASITech
             <br />
             Asi Tech
           </span>
@@ -370,9 +369,9 @@ const Hero = ({ theme }) => {
           />
 
           {[
-            { num: "50+", label: "Projects Delivered" },
-            { num: "15+", label: "Clients Worldwide" },
-            { num: "3+", label: "Years of Excellence" },
+            { num: "5+", label: "Projects Delivered" },
+            { num: "10+", label: "Clients Worldwide" },
+            { num: "2+", label: "Years of Excellence" },
           ].map((stat, i, arr) => (
             <div
               key={stat.num}
