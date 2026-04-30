@@ -15,7 +15,7 @@ const SERVICES = [
   "Full-Stack Systems",
 ];
 
-const Hero = () => {
+const Hero = ({ theme }) => {
   const [currentImage, setCurrentImage] = useState(0);
   const [serviceIndex, setServiceIndex] = useState(0);
 
@@ -47,7 +47,7 @@ const Hero = () => {
         overflow: "hidden",
       }}
     >
-      {/* Background slideshow */}
+      {/* ── Animated background slideshow (untouched) ── */}
       <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
         <AnimatePresence mode="wait">
           <motion.img
@@ -69,18 +69,21 @@ const Hero = () => {
         </AnimatePresence>
       </div>
 
-      {/* Gradient overlay */}
+      {/* ── Gradient overlay (untouched) ── */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           zIndex: 1,
           background:
-            "linear-gradient(to bottom, rgba(5,10,20,0.82) 0%, rgba(5,10,20,0.55) 50%, rgba(5,10,20,0.90) 100%)",
+            theme === "dark"
+              ? "linear-gradient(to bottom, rgba(5,10,20,0.85) 0%, rgba(5,10,20,0.6) 50%, rgba(5,10,20,0.95) 100%)"
+              : "linear-gradient(to bottom, rgba(255,255,255,0.14) 0%, rgba(198,183,183,0.4) 50%, rgba(255,255,255,0.19) 100%)",
+          transition: "background 0.3s ease",
         }}
       />
 
-      {/* Mesh accent */}
+      {/* ── Mesh accent (untouched) ── */}
       <div
         style={{
           position: "absolute",
@@ -88,11 +91,14 @@ const Hero = () => {
           zIndex: 2,
           pointerEvents: "none",
           background:
-            "radial-gradient(ellipse 70% 60% at 50% 60%, rgba(37,99,235,0.12) 0%, transparent 70%)",
+            theme === "dark"
+              ? "radial-gradient(ellipse 70% 60% at 50% 60%, rgba(37,99,235,0.15) 0%, transparent 75%)"
+              : "radial-gradient(ellipse 70% 60% at 50% 60%, rgba(37,99,235,0.08) 0%, transparent 70%)",
+          transition: "background 0.3s ease",
         }}
       />
 
-      {/* Content */}
+      {/* ── Content ── */}
       <div
         style={{
           position: "relative",
@@ -104,6 +110,7 @@ const Hero = () => {
           paddingTop: "80px",
         }}
       >
+        {/* Badge — glass pill */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -118,12 +125,24 @@ const Hero = () => {
               fontWeight: 600,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
-              color: "rgba(147,197,253,1)",
-              background: "rgba(37,99,235,0.18)",
-              border: "1px solid rgba(37,99,235,0.35)",
+              color: theme === "dark" ? "rgba(147,197,253,1)" : "var(--brand)",
+              background:
+                theme === "dark"
+                  ? "rgba(17,24,39,0.52)"
+                  : "rgba(255,255,255,0.55)",
+              border:
+                theme === "dark"
+                  ? "1px solid rgba(255,255,255,0.09)"
+                  : "1px solid rgba(255,255,255,0.75)",
               borderRadius: "999px",
               padding: "0.3rem 1rem",
-              backdropFilter: "blur(8px)",
+              backdropFilter: "blur(18px) saturate(1.6)",
+              WebkitBackdropFilter: "blur(18px) saturate(1.6)",
+              boxShadow:
+                theme === "dark"
+                  ? "0 8px 32px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.08)"
+                  : "0 8px 32px rgba(0,0,0,0.10), inset 0 1px 0 rgba(255,255,255,0.8)",
+              transition: "all 0.3s ease",
             }}
           >
             <span
@@ -139,6 +158,7 @@ const Hero = () => {
           </span>
         </motion.div>
 
+        {/* Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -146,24 +166,28 @@ const Hero = () => {
           style={{
             fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
             fontWeight: 800,
-            color: "#ffffff",
+            color: theme === "dark" ? "#f1f5f9" : "#0f172a",
             lineHeight: 1.1,
             letterSpacing: "-0.04em",
             margin: "1.25rem 0 0",
             fontFamily: "var(--font-sans)",
+            textShadow:
+              theme === "dark"
+                ? "0 2px 24px rgba(0,0,0,0.6)"
+                : "0 2px 16px rgba(255,255,255,0.6)",
+            transition: "color 0.3s ease",
           }}
         >
           Build Smarter with{" "}
           <span
             style={{
-              background:
-                "linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #818cf8 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
+              color: theme === "dark" ? "#ffffff" : "#2563eb",
+              fontWeight: 800,
             }}
           >
             ASITech
+            <br />
+            Asi Tech
           </span>
         </motion.h1>
 
@@ -184,8 +208,10 @@ const Hero = () => {
               style={{
                 fontSize: "clamp(1rem, 2vw, 1.25rem)",
                 fontWeight: 500,
-                color: "rgba(147,197,253,0.9)",
+                color:
+                  theme === "dark" ? "rgba(147,197,253,0.9)" : "var(--brand)",
                 letterSpacing: "-0.01em",
+                transition: "color 0.3s ease",
               }}
             >
               {SERVICES[serviceIndex]}
@@ -193,6 +219,7 @@ const Hero = () => {
           </AnimatePresence>
         </motion.div>
 
+        {/* Description */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -200,9 +227,14 @@ const Hero = () => {
           style={{
             fontSize: "clamp(0.9375rem, 1.6vw, 1.0625rem)",
             lineHeight: 1.75,
-            color: "rgba(203,213,225,0.85)",
+            color: theme === "dark" ? "rgba(148,163,184,0.95)" : "#334155",
             maxWidth: "600px",
             margin: "1.25rem auto 0",
+            textShadow:
+              theme === "dark"
+                ? "0 1px 8px rgba(0,0,0,0.5)"
+                : "0 1px 6px rgba(255,255,255,0.7)",
+            transition: "color 0.3s ease",
           }}
         >
           Empowering your digital future through innovative IT solutions, AI
@@ -210,6 +242,7 @@ const Hero = () => {
           businesses that demand excellence.
         </motion.p>
 
+        {/* CTA buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -222,6 +255,7 @@ const Hero = () => {
             marginTop: "2.25rem",
           }}
         >
+          {/* Primary CTA — solid brand */}
           <motion.button
             whileHover={{ scale: 1.03, y: -2 }}
             whileTap={{ scale: 0.97 }}
@@ -245,6 +279,7 @@ const Hero = () => {
             Explore Services <ArrowRight size={16} />
           </motion.button>
 
+          {/* Secondary CTA — glass button */}
           <motion.button
             whileHover={{ scale: 1.03, y: -2 }}
             whileTap={{ scale: 0.97 }}
@@ -253,24 +288,136 @@ const Hero = () => {
               display: "inline-flex",
               alignItems: "center",
               gap: "0.5rem",
-              background: "rgba(255,255,255,0.08)",
-              color: "#fff",
+              background:
+                theme === "dark"
+                  ? "rgba(17,24,39,0.52)"
+                  : "rgba(255,255,255,0.55)",
+              color: theme === "dark" ? "#f1f5f9" : "#0f172a",
               fontWeight: 500,
               fontSize: "0.9375rem",
               padding: "0.8125rem 1.875rem",
               borderRadius: "0.625rem",
-              border: "1px solid rgba(255,255,255,0.2)",
+              border:
+                theme === "dark"
+                  ? "1px solid rgba(255,255,255,0.09)"
+                  : "1px solid rgba(255,255,255,0.75)",
               cursor: "pointer",
-              backdropFilter: "blur(8px)",
+              backdropFilter: "blur(18px) saturate(1.6)",
+              WebkitBackdropFilter: "blur(18px) saturate(1.6)",
+              boxShadow:
+                theme === "dark"
+                  ? "0 8px 32px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.08)"
+                  : "0 8px 32px rgba(0,0,0,0.10), inset 0 1px 0 rgba(255,255,255,0.8)",
               fontFamily: "var(--font-sans)",
+              transition: "all 0.3s ease",
             }}
           >
             Start a Project
           </motion.button>
         </motion.div>
+
+        {/* Trust bar — glass card */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8 }}
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "0",
+            marginTop: "3.5rem",
+            flexWrap: "wrap",
+            background:
+              theme === "dark"
+                ? "rgba(17,24,39,0.52)"
+                : "rgba(255,255,255,0.55)",
+            border:
+              theme === "dark"
+                ? "1px solid rgba(255,255,255,0.09)"
+                : "1px solid rgba(255,255,255,0.75)",
+            borderRadius: "1rem",
+            backdropFilter: "blur(18px) saturate(1.6)",
+            WebkitBackdropFilter: "blur(18px) saturate(1.6)",
+            boxShadow:
+              theme === "dark"
+                ? "0 8px 32px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.08)"
+                : "0 8px 32px rgba(0,0,0,0.10), inset 0 1px 0 rgba(255,255,255,0.8)",
+            padding: "0.75rem 0",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          {/* top-edge highlight streak */}
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: "10%",
+              right: "10%",
+              height: "1px",
+              background: `linear-gradient(90deg, transparent, ${
+                theme === "dark"
+                  ? "rgba(255,255,255,0.06)"
+                  : "rgba(255,255,255,0.65)"
+              } 40%, ${
+                theme === "dark"
+                  ? "rgba(255,255,255,0.06)"
+                  : "rgba(255,255,255,0.65)"
+              } 60%, transparent)`,
+              pointerEvents: "none",
+            }}
+          />
+
+          {[
+            { num: "50+", label: "Projects Delivered" },
+            { num: "15+", label: "Clients Worldwide" },
+            { num: "3+", label: "Years of Excellence" },
+          ].map((stat, i, arr) => (
+            <div
+              key={stat.num}
+              style={{
+                textAlign: "center",
+                padding: "0.5rem 2.25rem",
+                borderRight:
+                  i < arr.length - 1
+                    ? theme === "dark"
+                      ? "1px solid rgba(255,255,255,0.08)"
+                      : "1px solid rgba(0,0,0,0.08)"
+                    : "none",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: "1.375rem",
+                  fontWeight: 700,
+                  color: theme === "dark" ? "#f1f5f9" : "#0f172a",
+                  letterSpacing: "-0.03em",
+                  transition: "color 0.3s ease",
+                }}
+              >
+                {stat.num}
+              </div>
+              <div
+                style={{
+                  fontSize: "0.75rem",
+                  color:
+                    theme === "dark"
+                      ? "rgba(148,163,184,0.85)"
+                      : "var(--text-secondary)",
+                  marginTop: "2px",
+                  letterSpacing: "0.03em",
+                  transition: "color 0.3s ease",
+                }}
+              >
+                {stat.label}
+              </div>
+            </div>
+          ))}
+        </motion.div>
       </div>
 
-      {/* Dots */}
+      {/* ── Slideshow dots ── */}
       <div
         style={{
           position: "absolute",
@@ -302,7 +449,7 @@ const Hero = () => {
         ))}
       </div>
 
-      {/* Scroll cue */}
+      {/* ── Scroll cue ── */}
       <motion.div
         animate={{ y: [0, 6, 0] }}
         transition={{ repeat: Infinity, duration: 2.2 }}
@@ -310,8 +457,9 @@ const Hero = () => {
           position: "absolute",
           bottom: "4.5rem",
           right: "2rem",
-          zIndex: 3,
-          color: "rgba(148,163,184,0.6)",
+          zIndex: 2,
+          color: theme === "dark" ? "rgba(148,163,184,0.6)" : "rgba(15,23,42,0.4)",
+          transition: "color 0.3s ease",
         }}
       >
         <ChevronDown size={20} />

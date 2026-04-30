@@ -36,6 +36,15 @@
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
   --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.12);
+
+  /* ── Glass tokens (light) ── */
+  --glass-bg:        rgba(255, 255, 255, 0.55);
+  --glass-border:    rgba(255, 255, 255, 0.75);
+  --glass-shadow:    0 8px 32px rgba(0, 0, 0, 0.10),
+                     0 1.5px 6px rgba(37, 99, 235, 0.06);
+  --glass-blur:      blur(18px) saturate(1.6);
+  --glass-highlight: rgba(255, 255, 255, 0.65);
+  --glass-inset:     inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 /* ─── Dark Theme ─────────────────────────────────────────────── */
@@ -56,6 +65,15 @@
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.6);
+
+  /* ── Glass tokens (dark) ── */
+  --glass-bg:        rgba(17, 24, 39, 0.52);
+  --glass-border:    rgba(255, 255, 255, 0.09);
+  --glass-shadow:    0 8px 32px rgba(0, 0, 0, 0.45),
+                     0 1.5px 6px rgba(37, 99, 235, 0.08);
+  --glass-blur:      blur(20px) saturate(1.8);
+  --glass-highlight: rgba(255, 255, 255, 0.06);
+  --glass-inset:     inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 /* ─── Base ───────────────────────────────────────────────────── */
@@ -179,6 +197,67 @@ body {
 .card:hover {
   box-shadow: var(--shadow-lg);
   border-color: var(--brand);
+}
+
+/* ─── Glass Card ─────────────────────────────────────────────── */
+/*
+  Use .card-glass instead of .card for the glassmorphism variant.
+  You can also stack both: class="card card-glass" — glass styles win
+  on background, border, and shadow while .card provides the base
+  border-radius and transition timing.
+*/
+.card-glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 1rem;
+  box-shadow: var(--glass-shadow), var(--glass-inset);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  transition:
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s var(--ease-out-expo);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Top-edge light streak — the signature enterprise glass look */
+.card-glass::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--glass-highlight) 40%,
+    var(--glass-highlight) 60%,
+    transparent
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.card-glass:hover {
+  box-shadow: var(--shadow-lg), var(--glass-inset);
+  border-color: var(--brand);
+  transform: translateY(-2px);
+}
+
+/* ─── Glassmorphism utility class ────────────────────────────── */
+/*
+  Add class="glass" to any element — modals, dropdowns, tooltips,
+  sidebars, hero overlays — to apply the backdrop-blur surface.
+  Does NOT set border-radius so you can pair it with your own shape.
+*/
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), var(--glass-inset);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
 }
 
 /* ─── Button base ────────────────────────────────────────────── */

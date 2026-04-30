@@ -46,7 +46,7 @@ const Navbar = ({ theme, toggleTheme }) => {
 
   return (
     <>
-      {/* Progress bar */}
+      {/* Scroll progress bar */}
       <motion.div
         className="fixed top-0 left-0 h-[2px] z-[99999]"
         style={{ background: "var(--brand)", width: `${scrollProgress}%` }}
@@ -60,11 +60,15 @@ const Navbar = ({ theme, toggleTheme }) => {
           left: 0,
           width: "100%",
           zIndex: 99998,
-          background: scrolled ? "var(--nav-bg)" : "transparent",
-          backdropFilter: scrolled ? "blur(16px)" : "none",
-          boxShadow: scrolled ? "var(--shadow-sm)" : "none",
+          /* ── Glassmorphism surface when scrolled ── */
+          background: scrolled ? "var(--glass-bg)" : "transparent",
+          backdropFilter: scrolled ? "var(--glass-blur)" : "none",
+          WebkitBackdropFilter: scrolled ? "var(--glass-blur)" : "none",
+          boxShadow: scrolled
+            ? "var(--glass-shadow), var(--glass-inset)"
+            : "none",
           borderBottom: scrolled
-            ? "1px solid var(--border)"
+            ? "1px solid var(--glass-border)"
             : "1px solid transparent",
           transition: "all 0.3s ease",
         }}
@@ -106,15 +110,17 @@ const Navbar = ({ theme, toggleTheme }) => {
                 }}
               />
               <span
+              
                 style={{
-                  fontSize: "1.1rem",
+                  fontSize: "1.6rem",
                   fontWeight: 700,
                   color: "var(--text-primary)",
                   letterSpacing: "-0.02em",
                   fontFamily: "var(--font-sans)",
+                  transition: "color 0.3s ease",
                 }}
               >
-                ASI<span style={{ color: "var(--brand)" }}>TECH</span>
+                ASI{" "}<span style={{ color: "var(--brand)" }}>{" "}TECH</span>
               </span>
             </motion.button>
 
@@ -192,8 +198,11 @@ const Navbar = ({ theme, toggleTheme }) => {
                   justifyContent: "center",
                   width: "36px",
                   height: "36px",
-                  background: "var(--bg-card-alt)",
-                  border: "1px solid var(--border)",
+                  /* ── Glass surface on the icon button ── */
+                  background: "var(--glass-bg)",
+                  border: "1px solid var(--glass-border)",
+                  backdropFilter: "var(--glass-blur)",
+                  WebkitBackdropFilter: "var(--glass-blur)",
                   borderRadius: "8px",
                   cursor: "pointer",
                   color: "var(--text-secondary)",
@@ -232,8 +241,11 @@ const Navbar = ({ theme, toggleTheme }) => {
                   justifyContent: "center",
                   width: "36px",
                   height: "36px",
-                  background: "var(--bg-card-alt)",
-                  border: "1px solid var(--border)",
+                  /* ── Glass surface on mobile theme toggle ── */
+                  background: "var(--glass-bg)",
+                  border: "1px solid var(--glass-border)",
+                  backdropFilter: "var(--glass-blur)",
+                  WebkitBackdropFilter: "var(--glass-blur)",
                   borderRadius: "8px",
                   cursor: "pointer",
                   color: "var(--text-secondary)",
@@ -250,8 +262,11 @@ const Navbar = ({ theme, toggleTheme }) => {
                   justifyContent: "center",
                   width: "36px",
                   height: "36px",
-                  background: "var(--bg-card-alt)",
-                  border: "1px solid var(--border)",
+                  /* ── Glass surface on mobile hamburger ── */
+                  background: "var(--glass-bg)",
+                  border: "1px solid var(--glass-border)",
+                  backdropFilter: "var(--glass-blur)",
+                  WebkitBackdropFilter: "var(--glass-blur)",
                   borderRadius: "8px",
                   cursor: "pointer",
                   color: "var(--text-primary)",
@@ -264,7 +279,7 @@ const Navbar = ({ theme, toggleTheme }) => {
         </div>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile menu — full glass panel */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -277,9 +292,12 @@ const Navbar = ({ theme, toggleTheme }) => {
               top: "68px",
               left: 0,
               right: 0,
-              background: "var(--bg-card)",
-              borderBottom: "1px solid var(--border)",
-              boxShadow: "var(--shadow-lg)",
+              /* ── Glassmorphism mobile drawer ── */
+              background: "var(--glass-bg)",
+              backdropFilter: "var(--glass-blur)",
+              WebkitBackdropFilter: "var(--glass-blur)",
+              borderBottom: "1px solid var(--glass-border)",
+              boxShadow: "var(--glass-shadow)",
               zIndex: 99997,
               padding: "1rem 1.5rem 1.5rem",
             }}
@@ -308,6 +326,7 @@ const Navbar = ({ theme, toggleTheme }) => {
                       : "var(--text-secondary)",
                   fontFamily: "var(--font-sans)",
                   cursor: "pointer",
+                  transition: "color 0.3s ease",
                 }}
               >
                 {sec.charAt(0).toUpperCase() + sec.slice(1)}
