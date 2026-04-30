@@ -8,6 +8,7 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     message: ''
   });
 
@@ -26,13 +27,14 @@ const Contact = () => {
     const templateParams = {
       name: formData.name,
       email: formData.email,
+      phone: formData.phone,
       message: formData.message
     };
 
     emailjs.send(serviceID, templateID, templateParams, publicKey)
       .then(() => {
         setStatus('Sent successfully! 🎉');
-        setFormData({ name: '', email: '', message: '' });
+        setFormData({ name: '', email: '', phone: '', message: '' });
       })
       .catch((error) => {
         console.error(error);
@@ -92,6 +94,7 @@ const Contact = () => {
               {[
                 { type: 'text', placeholder: 'Your Name', value: 'name' },
                 { type: 'email', placeholder: 'Your Email', value: 'email' },
+                { type: 'tel', placeholder: 'Your Phone', value: 'phone' },
               ].map((field, i) => (
                 <motion.div
                   key={field.value}
