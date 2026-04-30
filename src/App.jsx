@@ -7,6 +7,7 @@ import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
 import Stats from "./components/Stats";
 import ToolsSection from "./components/ToolsSection";
+import ScrollToTopButton from "./components/ScrollToTopButton";
 
 const App = () => {
   const [theme, setTheme] = useState(() => {
@@ -47,6 +48,7 @@ const App = () => {
       </section>
 
       <Footer />
+      <ScrollToTopButton/>
     </div>
   );
 };

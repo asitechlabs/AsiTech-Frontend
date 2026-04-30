@@ -461,7 +461,6 @@ const Hero = ({ theme }) => {
           transition: "color 0.3s ease",
         }}
       >
-        <ChevronDown size={20} />
       </motion.div>
 
       <style>{`
