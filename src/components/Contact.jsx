@@ -4,17 +4,15 @@ import { FiSend } from 'react-icons/fi';
 import emailjs from '@emailjs/browser';
 
 const Contact = () => {
-  // Form state
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     message: '',
   });
 
-  // Status
   const [status, setStatus] = useState('');
 
-  // Handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
     setStatus('Sending...');
@@ -26,6 +24,7 @@ const Contact = () => {
     const templateParams = {
       name: formData.name,
       email: formData.email,
+      phone: formData.phone, // ✅ included
       message: formData.message,
     };
 
@@ -33,7 +32,14 @@ const Contact = () => {
       .send(serviceID, templateID, templateParams, publicKey)
       .then(() => {
         setStatus('Sent successfully! 🎉');
-        setFormData({ name: '', email: '', message: '' });
+
+        // ✅ proper reset
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          message: '',
+        });
       })
       .catch((error) => {
         console.error(error);
@@ -41,9 +47,9 @@ const Contact = () => {
       });
   };
 
-  // Google Map link
   const mapSrc =
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4486.301677318353!2d85.29848507105801!3d27.67212832306894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xaa4ab8369e1e172d%3A0xc8cd87e8ab9e1ada!2sASI%20logistics!5e0!3m2!1sen!2snp!4v1776417494418!5m2!1sen!2snp';
+
   return (
     <section
       id="contact"
@@ -72,7 +78,6 @@ const Contact = () => {
           </p>
         </div>
 
-        {/* Form + Map */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           {/* FORM */}
           <motion.div
@@ -87,9 +92,15 @@ const Contact = () => {
             </h3>
 
             <form onSubmit={handleSubmit} className="space-y-5">
+              {/* Inputs */}
               {[
                 { type: 'text', placeholder: 'Your Name', value: 'name' },
                 { type: 'email', placeholder: 'Your Email', value: 'email' },
+                {
+                  type: 'tel',
+                  placeholder: 'Your Phone Number',
+                  value: 'phone',
+                },
               ].map((field, i) => (
                 <motion.div
                   key={field.value}
@@ -113,6 +124,7 @@ const Contact = () => {
                 </motion.div>
               ))}
 
+              {/* Message */}
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -141,6 +153,7 @@ const Contact = () => {
                 </motion.p>
               )}
 
+              {/* Button */}
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
