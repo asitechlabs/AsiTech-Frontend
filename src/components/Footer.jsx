@@ -29,13 +29,13 @@ const Footer = () => {
 
             {/* Social Icons */}
             <div className="flex gap-4 mt-5 text-gray-500">
-               <a href="#" className="hover:text-blue-600 transition">
+               <a target='_blank' href="#" className="hover:text-blue-600 transition">
                 <FiLinkedin size={18} />
               </a>
-              <a href="#" className="hover:text-blue-600 transition">
+              <a target='_blank' href="https://www.facebook.com/profile.php?id=61585470568856" className="hover:text-blue-600 transition">
                 <FiFacebook size={18} />
               </a>
-              <a href="#" className="hover:text-blue-600 transition">
+              <a target='_blank' href="https://www.instagram.com/asitech.official/" className="hover:text-blue-600 transition">
                 <FiInstagram size={18} />
               </a>
              
@@ -47,7 +47,7 @@ const Footer = () => {
           <div>
             <h4 className="text-gray-900 font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-3 text-sm text-gray-600">
-              {['Home', 'About', 'Features', 'Tools','Career', 'Contact'].map((item) => (
+              {['Home', 'About', 'Features', 'Tools', 'Contact'].map((item) => (
                 <li key={item}>
                   <a
                     href={`#${item.toLowerCase()}`}
@@ -69,13 +69,13 @@ const Footer = () => {
               <li className="flex items-center gap-2">
                 <FiMail className="text-blue-600" />
                 <a href="mailto:info@asitech.com" className="hover:text-blue-600">
-                  info@asitech.com
+                  asi.research@gmail.com
                 </a>
               </li>
 
               <li className="flex items-center gap-2">
                 <FiPhone className="text-blue-600" />
-                <a href="tel:+9771XXXXXXX" className="hover:text-blue-600">
+                <a href="tel:+9779768552107" className="hover:text-blue-600">
                   +977 9768552107
                 </a>
               </li>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const sections = ["home", "about","features", "tools", "career", "contact"];
+const sections = ["home", "about","features", "tools", "contact"];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -83,7 +83,7 @@ const Navbar = () => {
               className="flex items-center gap-2"
             >
               <img
-                src="/src/assets/logo.png"
+                src="https://scontent.fjkr2-1.fna.fbcdn.net/v/t39.30808-6/652354329_122119029831182352_7674516002346519096_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=l_y4Yl2-hzsQ7kNvwH7M6il&_nc_oc=AdpgkyHOMY24RMltKkwgz3_QpECSLshAT1SniX9Yp2gL3JIwzf-TS91mhHOggwVwews&_nc_zt=23&_nc_ht=scontent.fjkr2-1.fna&_nc_gid=UpvDZ1FLqfkrxeH8yoHEGg&_nc_ss=7b2a8&oh=00_Af3IvMg4D8fkPmlxZh5-s0sJhER7M3vjQ46t-ikMqeM_iQ&oe=69F8AB0F"
                 className="h-9 sm:h-10 md:h-12"
                 alt="logo"
               />
