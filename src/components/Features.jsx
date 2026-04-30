@@ -1,133 +1,202 @@
-import React from "react";
 import { motion } from "framer-motion";
-import { Cpu, Globe, ShieldCheck, BarChart3, Cloud, Zap } from "lucide-react";
+import { BarChart3, Cloud, Cpu, Globe, ShieldCheck, Zap } from "lucide-react";
 
 const features = [
   {
-    icon: <Cpu size={28} />,
-    title: "AI Integration",
-    desc: "Leverage intelligent systems to automate processes and deliver smarter user experiences.",
+    Icon: Cpu,
+    title: "AI & Automation",
+    tag: "Intelligent Systems",
+    desc: "Integrate large language models, computer vision, and predictive analytics into your core workflows — turning manual bottlenecks into autonomous, intelligent processes.",
   },
   {
-    icon: <Globe size={28} />,
+    Icon: Globe,
     title: "Web Development",
-    desc: "Responsive, scalable, and high-performance web applications tailored to your business.",
+    tag: "Full-Stack Engineering",
+    desc: "Responsive, performant web applications built with React, Next.js, Node.js, and FastAPI. From MVPs to enterprise-scale platforms, we architect for reliability and speed.",
   },
   {
-    icon: <ShieldCheck size={28} />,
-    title: "Security First",
-    desc: "We implement industry-grade security practices to protect your data and infrastructure.",
+    Icon: ShieldCheck,
+    title: "Security Engineering",
+    tag: "Infrastructure & Compliance",
+    desc: "Security is not an afterthought — it's built in from day one. We implement industry-standard practices covering authentication, encryption, and vulnerability management.",
   },
   {
-    icon: <BarChart3 size={28} />,
-    title: "Data Analytics",
-    desc: "Transform data into actionable insights with powerful analytics and visualization tools.",
+    Icon: BarChart3,
+    title: "Data & Analytics",
+    tag: "Insight & Visualisation",
+    desc: "Transform raw data into strategic advantage. We design end-to-end data pipelines, dashboards, and visualisation layers that surface actionable insights in real time.",
   },
   {
-    icon: <Cloud size={28} />,
+    Icon: Cloud,
     title: "Cloud Solutions",
-    desc: "Deploy and scale your applications seamlessly using modern cloud technologies.",
+    tag: "DevOps & Deployment",
+    desc: "Architect, deploy, and scale your applications on modern cloud infrastructure. CI/CD pipelines, containerisation, and auto-scaling built for production workloads.",
   },
   {
-    icon: <Zap size={28} />,
-    title: "Fast Performance",
-    desc: "Optimized systems ensuring lightning-fast load times and smooth user experiences.",
+    Icon: Zap,
+    title: "Performance Optimisation",
+    tag: "Speed & Reliability",
+    desc: "Systematic auditing and refactoring to achieve sub-second load times and 99.9% uptime. Every millisecond reduced is a measurable improvement to your user experience.",
   },
 ];
 
-const Features = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-      },
-    },
-  };
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+};
+const itemVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: "easeOut" },
+  },
+};
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-  };
-
-  return (
-    <section id="features" className="bg-linear-to-b from-white to-gray-300 py-2 px-6">
-      <div className="max-w-7xl mx-auto text-center">
-
-        {/* Badge */}
-        <motion.span
-          initial={{ opacity: 0, y: -10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="inline-flex items-center px-4 mb-3 text-xs font-bold tracking-widest text-blue-600 bg-blue-50 border border-blue-100 rounded-full uppercase"
+const Features = () => (
+  <section
+    id="features"
+    className="section-pad"
+    style={{ background: "var(--bg)", position: "relative" }}
+  >
+    <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 1.5rem" }}>
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        style={{ maxWidth: "600px", marginBottom: "4rem" }}
+      >
+        <span
+          className="label-chip"
+          style={{ marginBottom: "1.25rem", display: "inline-flex" }}
         >
           What We Offer
-        </motion.span>
+        </span>
+        <h2 className="section-title" style={{ marginBottom: "1.25rem" }}>
+          Services Built for
+          <br />
+          Modern Businesses
+        </h2>
+        <p className="section-subtitle">
+          We deliver cutting-edge solutions designed to help your organisation
+          grow, scale, and innovate confidently — whatever stage you're at.
+        </p>
+      </motion.div>
 
-        {/* Heading */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="text-3xl md:text-5xl font-bold text-gray-900 mb-6"
-        >
-          Our <span className="text-blue-600">Features</span>
-        </motion.h2>
-
-        {/* Description */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="max-w-2xl mx-auto text-gray-500 text-lg mb-16"
-        >
-          We provide cutting-edge solutions designed to help your business grow,
-          scale, and innovate in today's fast-paced digital world.
-        </motion.p>
-
-        {/* Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
-        >
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              whileHover={{ y: -8, scale: 1.02 }}
-              className="group p-6 sm:p-8 rounded-2xl border border-gray-200 hover:border-blue-500 hover:shadow-xl transition-all duration-300 bg-white text-left cursor-pointer"
+      {/* Grid */}
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.05 }}
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gap: "1.25rem",
+        }}
+      >
+        {features.map((f, i) => (
+          <motion.div
+            key={f.title}
+            variants={itemVariants}
+            whileHover={{ y: -5 }}
+            style={{
+              background: "var(--bg-card)",
+              border: "1px solid var(--border)",
+              borderRadius: "1rem",
+              padding: "1.875rem",
+              cursor: "default",
+              position: "relative",
+              overflow: "hidden",
+              transition: "border-color 0.25s ease, box-shadow 0.25s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = "var(--brand)";
+              e.currentTarget.style.boxShadow = "var(--shadow-md)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = "var(--border)";
+              e.currentTarget.style.boxShadow = "none";
+            }}
+          >
+            {/* Number watermark */}
+            <span
+              style={{
+                position: "absolute",
+                top: "1.25rem",
+                right: "1.5rem",
+                fontSize: "0.6875rem",
+                fontFamily: "var(--font-mono)",
+                color: "var(--border)",
+                userSelect: "none",
+              }}
             >
-              {/* Icon */}
-              <div className="w-14 h-14 flex items-center justify-center rounded-xl bg-blue-50 text-blue-600 mb-6 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
-                {feature.icon}
-              </div>
+              {String(i + 1).padStart(2, "0")}
+            </span>
 
-              {/* Title */}
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                {feature.title}
-              </h3>
+            {/* Icon */}
+            <div
+              style={{
+                width: "44px",
+                height: "44px",
+                background: "var(--brand-dim)",
+                border: "1px solid var(--brand-mid)",
+                borderRadius: "10px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "var(--brand)",
+                marginBottom: "1.375rem",
+                transition: "background 0.2s ease",
+              }}
+              className="feature-icon"
+            >
+              <f.Icon size={20} />
+            </div>
 
-              {/* Description */}
-              <p className="text-gray-500 leading-relaxed text-sm">
-                {feature.desc}
-              </p>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  );
-};
+            {/* Tag */}
+            <span
+              style={{
+                fontSize: "0.6875rem",
+                fontWeight: 600,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "var(--text-tertiary)",
+                fontFamily: "var(--font-mono)",
+              }}
+            >
+              {f.tag}
+            </span>
+
+            <h3
+              style={{
+                fontSize: "1.0625rem",
+                fontWeight: 700,
+                color: "var(--text-primary)",
+                letterSpacing: "-0.02em",
+                margin: "0.5rem 0 0.875rem",
+              }}
+            >
+              {f.title}
+            </h3>
+
+            <p
+              style={{
+                fontSize: "0.9rem",
+                lineHeight: 1.75,
+                color: "var(--text-secondary)",
+                margin: 0,
+              }}
+            >
+              {f.desc}
+            </p>
+          </motion.div>
+        ))}
+      </motion.div>
+    </div>
+  </section>
+);
 
 export default Features;

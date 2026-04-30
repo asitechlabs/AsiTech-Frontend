@@ -1,100 +1,241 @@
-import React from 'react';
-import { toolUsed } from '../data/Tool';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
+import { toolUsed } from "../data/Tool";
+
+const categories = [
+  "All",
+  ...Array.from(new Set(toolUsed.map((t) => t.category))),
+];
 
 const ToolsSection = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
+  const [active, setActive] = useState("All");
 
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-      },
-    },
-  };
+  const filtered =
+    active === "All" ? toolUsed : toolUsed.filter((t) => t.category === active);
 
   return (
     <section
       id="tools"
-      className="py-2 bg-linear-to-b from-white to-gray-300 overflow-hidden"
+      className="section-pad"
+      style={{ background: "var(--bg-subtle)" }}
     >
-      <div className="max-w-6xl mx-auto px-6">
-
-        {/* Title */}
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
+      <div
+        style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 1.5rem" }}
+      >
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-4xl font-extrabold text-center mb-4 text-gray-900"
+          transition={{ duration: 0.6 }}
+          style={{ marginBottom: "3rem" }}
         >
-          Tools We Use
-        </motion.h2>
+          <span
+            className="label-chip"
+            style={{ marginBottom: "1.25rem", display: "inline-flex" }}
+          >
+            Technology Stack
+          </span>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "flex-end",
+              justifyContent: "space-between",
+              flexWrap: "wrap",
+              gap: "1.5rem",
+            }}
+          >
+            <div>
+              <h2
+                className="section-title"
+                style={{ marginBottom: "0.875rem" }}
+              >
+                Tools We Engineer With
+              </h2>
+              <p className="section-subtitle">
+                A modern, production-grade tech stack powering scalable
+                applications, intelligent systems, and seamless user
+                experiences.
+              </p>
+            </div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="text-center text-gray-500 mb-12 max-w-2xl mx-auto"
-        >
-          A modern tech stack powering scalable applications, intelligent systems, and seamless user experiences.
-        </motion.p>
+            {/* Category filter */}
+            <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActive(cat)}
+                  style={{
+                    padding: "0.375rem 0.875rem",
+                    borderRadius: "999px",
+                    fontSize: "0.8125rem",
+                    fontWeight: 500,
+                    border: "1px solid",
+                    cursor: "pointer",
+                    fontFamily: "var(--font-sans)",
+                    transition: "all 0.2s ease",
+                    borderColor:
+                      active === cat ? "var(--brand)" : "var(--border)",
+                    background: active === cat ? "var(--brand)" : "transparent",
+                    color: active === cat ? "#fff" : "var(--text-secondary)",
+                  }}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+        </motion.div>
 
         {/* Grid */}
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+          layout
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
+            gap: "1.125rem",
+          }}
         >
-          {toolUsed.map((tool) => (
-            <motion.div
-              key={tool.name}
-              variants={itemVariants}
-              whileHover={{
-                y: -10,
-                transition: { duration: 0.3 }
+          <AnimatePresence mode="popLayout">
+            {filtered.map((tool) => (
+              <motion.div
+                key={tool.name}
+                layout
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.25 }}
+                whileHover={{ y: -5 }}
+                style={{
+                  background: "var(--bg-card)",
+                  border: "1px solid var(--border)",
+                  borderRadius: "0.875rem",
+                  padding: "1.5rem",
+                  cursor: "default",
+                  transition: "border-color 0.2s ease, box-shadow 0.2s ease",
+                  position: "relative",
+                  overflow: "hidden",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "var(--brand)";
+                  e.currentTarget.style.boxShadow = "var(--shadow-md)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "var(--border)";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
+              >
+                {/* Icon */}
+                <div
+                  style={{
+                    fontSize: "2rem",
+                    marginBottom: "1rem",
+                    lineHeight: 1,
+                  }}
+                >
+                  {tool.icon}
+                </div>
+
+                {/* Name */}
+                <h3
+                  style={{
+                    fontSize: "0.9375rem",
+                    fontWeight: 700,
+                    color: "var(--text-primary)",
+                    letterSpacing: "-0.01em",
+                    marginBottom: "0.375rem",
+                  }}
+                >
+                  {tool.name}
+                </h3>
+
+                {/* Category badge */}
+                <span
+                  style={{
+                    display: "inline-block",
+                    fontSize: "0.6875rem",
+                    fontWeight: 600,
+                    letterSpacing: "0.07em",
+                    textTransform: "uppercase",
+                    color: "var(--brand)",
+                    background: "var(--brand-dim)",
+                    border: "1px solid var(--brand-mid)",
+                    padding: "0.2rem 0.625rem",
+                    borderRadius: "999px",
+                    fontFamily: "var(--font-mono)",
+                    marginBottom: "0.875rem",
+                  }}
+                >
+                  {tool.category}
+                </span>
+
+                {/* Desc */}
+                <p
+                  style={{
+                    fontSize: "0.85rem",
+                    lineHeight: 1.7,
+                    color: "var(--text-secondary)",
+                    margin: 0,
+                  }}
+                >
+                  {tool.description}
+                </p>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+
+        {/* MERN stack callout */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          style={{
+            marginTop: "3rem",
+            padding: "1.5rem 2rem",
+            background: "var(--bg-card)",
+            border: "1px solid var(--border)",
+            borderRadius: "0.875rem",
+            display: "flex",
+            alignItems: "center",
+            gap: "1rem",
+            flexWrap: "wrap",
+          }}
+        >
+          <span
+            style={{
+              fontSize: "0.6875rem",
+              fontFamily: "var(--font-mono)",
+              fontWeight: 600,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: "var(--brand)",
+            }}
+          >
+            Stack expertise:
+          </span>
+          {[
+            "MERN Stack",
+            "Python + FastAPI",
+            "Next.js Full-Stack",
+            "NestJS + TypeScript",
+            "AI / ML Pipelines",
+          ].map((s) => (
+            <span
+              key={s}
+              style={{
+                fontSize: "0.8125rem",
+                fontWeight: 500,
+                color: "var(--text-secondary)",
+                background: "var(--bg-card-alt)",
+                border: "1px solid var(--border)",
+                padding: "0.3rem 0.75rem",
+                borderRadius: "6px",
               }}
-              className="relative group p-4 sm:p-6 rounded-2xl border border-gray-200 bg-white/60 backdrop-blur-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden break-words cursor-default"
             >
-
-              {/* Glow background effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-linear-to-br from-blue-500/10 via-transparent to-purple-500/10 rounded-2xl" />
-
-              {/* Icon */}
-              <div className="text-4xl mb-4 relative z-10 group-hover:scale-110 transition-transform duration-300">
-                {tool.icon}
-              </div>
-
-              {/* Name */}
-              <h3 className="text-xl font-bold text-gray-900 relative z-10">
-                {tool.name}
-              </h3>
-
-              {/* Category */}
-              <span className="inline-block mt-2 text-[11px] font-semibold tracking-wide text-blue-600 bg-blue-50 px-3 py-1 rounded-full relative z-10">
-                {tool.category}
-              </span>
-
-              {/* Description */}
-              <p className="text-gray-600 text-sm mt-4 leading-relaxed relative z-10">
-                {tool.description}
-              </p>
-
-            </motion.div>
+              {s}
+            </span>
           ))}
         </motion.div>
       </div>

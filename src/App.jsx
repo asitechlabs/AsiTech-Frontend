@@ -1,44 +1,53 @@
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Features from "./components/Features";
-import ToolsSection from "./components/ToolsSection";
+import { useEffect, useState } from "react";
 import About from "./components/About";
 import Contact from "./components/Contact";
-import Career from "./components/Career";
+import Features from "./components/Features";
 import Footer from "./components/Footer";
+import Hero from "./components/Hero";
+import Navbar from "./components/Navbar";
+import Stats from "./components/Stats";
+import ToolsSection from "./components/ToolsSection";
 
 const App = () => {
-  return (
-    <>
-      <Navbar />
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("theme") || "light";
+  });
 
-      <section id="home" className="pt-20">
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme((t) => (t === "light" ? "dark" : "light"));
+
+  return (
+    <div className="app-root">
+      <Navbar theme={theme} toggleTheme={toggleTheme} />
+
+      <section id="home">
         <Hero />
       </section>
-       <section id="about" className="pt-20">
+
+      <section id="about">
         <About />
       </section>
 
-      <section id="features" className="pt-20">
+      <section id="features">
         <Features />
       </section>
 
-      <section id="tools" className="pt-20">
+      <section id="tools">
         <ToolsSection />
       </section>
 
-     
+      <Stats />
 
-      {/* <section id="career" className="pt-20">
-        <Career />
-      </section> */}
-
-      <section id="contact" className="pt-20">
+      <section id="contact">
         <Contact />
       </section>
 
       <Footer />
-    </>
+    </div>
   );
 };
 

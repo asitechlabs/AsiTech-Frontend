@@ -1,100 +1,242 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { 
-  ChartBarIcon, 
-  LightBulbIcon, 
-  ShieldCheckIcon 
-} from '@heroicons/react/24/outline';
+import { motion } from "framer-motion";
+import { Eye, Heart, Target } from "lucide-react";
 
 const cards = [
   {
-    icon: ChartBarIcon,
-    bg: 'from-blue-50 to-blue-100',
-    title: 'Our Mission',
-    desc: 'To provide robust, scalable, and secure tech infrastructure for global enterprises built with the latest industry standards.',
+    Icon: Target,
+    accent: "#2563eb",
+    label: "Our Mission",
+    title: "Delivering Outcomes,\nNot Just Software",
+    desc: "We engineer robust, scalable, and secure technology infrastructure for businesses across industries — built to modern standards, designed for long-term growth.",
   },
   {
-    icon: LightBulbIcon,
-    bg: 'from-indigo-50 to-indigo-100',
-    title: 'Our Vision',
-    desc: 'Setting the gold standard for AI-driven automation and user-centric design across the global IT ecosystem.',
+    Icon: Eye,
+    accent: "#0ea5e9",
+    label: "Our Vision",
+    title: "Defining the Standard\nfor AI-Driven Development",
+    desc: "To become the region's most trusted technology partner — setting the benchmark for intelligent automation, user-centric design, and enterprise software excellence.",
   },
   {
-    icon: ShieldCheckIcon,
-    bg: 'from-purple-50 to-purple-100',
-    title: 'Our Values',
-    desc: 'Transparency, continuous innovation, and an unwavering commitment to clean code and client success.',
+    Icon: Heart,
+    accent: "#6366f1",
+    label: "Our Values",
+    title: "Transparency, Quality,\nand Client Success",
+    desc: "We operate with integrity at every level — clear communication, clean architecture, and an unwavering commitment to delivering work we're proud to stand behind.",
   },
 ];
 
-const About = () => {
-  return (
-    <section
-      id="about"
-      className="bg-gradient-to-b from-white to-gray-50 py-16 px-6"
+const About = () => (
+  <section
+    id="about"
+    className="section-pad mesh-bg"
+    style={{ background: "var(--bg-subtle)", position: "relative" }}
+  >
+    <div
+      style={{
+        maxWidth: "1200px",
+        margin: "0 auto",
+        padding: "0 1.5rem",
+        position: "relative",
+        zIndex: 1,
+      }}
     >
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        style={{ maxWidth: "640px", marginBottom: "4rem" }}
+      >
+        <span
+          className="label-chip"
+          style={{ marginBottom: "1.25rem", display: "inline-flex" }}
         >
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
-            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              About AsiTech
+          About AsiTech
+        </span>
+        <h2 className="section-title" style={{ marginBottom: "1.25rem" }}>
+          Bridging Complex Problems
+          <br />
+          with Precise Digital Solutions
+        </h2>
+        <p className="section-subtitle">
+          AsiTech is a software and technology firm based in Lalitpur, Nepal. We
+          specialise in full-stack web development, AI integration, and
+          enterprise system design — helping organisations at every stage
+          accelerate their digital transformation with clarity and confidence.
+        </p>
+      </motion.div>
+
+      {/* Cards */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+          gap: "1.5rem",
+        }}
+      >
+        {cards.map((card, i) => (
+          <motion.div
+            key={card.label}
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.55, delay: i * 0.12 }}
+            whileHover={{ y: -6 }}
+            style={{
+              background: "var(--bg-card)",
+              border: "1px solid var(--border)",
+              borderRadius: "1rem",
+              padding: "2rem",
+              position: "relative",
+              overflow: "hidden",
+              transition: "box-shadow 0.25s ease, border-color 0.25s ease",
+              cursor: "default",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.boxShadow = "var(--shadow-lg)";
+              e.currentTarget.style.borderColor = card.accent;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.boxShadow = "none";
+              e.currentTarget.style.borderColor = "var(--border)";
+            }}
+          >
+            {/* Top accent line */}
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: "2rem",
+                right: "2rem",
+                height: "2px",
+                background: card.accent,
+                borderRadius: "0 0 2px 2px",
+                opacity: 0.6,
+              }}
+            />
+
+            {/* Icon */}
+            <div
+              style={{
+                width: "44px",
+                height: "44px",
+                background: `${card.accent}18`,
+                border: `1px solid ${card.accent}30`,
+                borderRadius: "10px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                marginBottom: "1.5rem",
+                color: card.accent,
+              }}
+            >
+              <card.Icon size={20} />
+            </div>
+
+            {/* Label */}
+            <span
+              style={{
+                fontSize: "0.6875rem",
+                fontWeight: 600,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: card.accent,
+                fontFamily: "var(--font-mono)",
+              }}
+            >
+              {card.label}
             </span>
-          </h2>
 
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Bridging the gap between complex problems and innovative digital solutions.
-            We specialize in{' '}
-            <span className="text-blue-600 font-semibold">cutting-edge software development</span>
-            {' '}and{' '}
-            <span className="text-indigo-600 font-semibold">AI integration</span>,
-            empowering businesses to scale globally.
-          </p>
-        </motion.div>
+            {/* Title */}
+            <h3
+              style={{
+                fontSize: "1.125rem",
+                fontWeight: 700,
+                color: "var(--text-primary)",
+                lineHeight: 1.35,
+                letterSpacing: "-0.02em",
+                margin: "0.625rem 0 0.875rem",
+                whiteSpace: "pre-line",
+                fontFamily: "var(--font-sans)",
+              }}
+            >
+              {card.title}
+            </h3>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {cards.map((card, index) => {
-            const IconComponent = card.icon;
-            return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="group relative p-8 rounded-2xl border border-gray-200/50 bg-white/70 backdrop-blur-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-3 overflow-hidden"
-              >
-                {/* Glow background */}
-                <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 bg-gradient-to-br ${card.bg} rounded-2xl`} />
-
-                {/* Icon */}
-                <div className="w-16 h-16 mx-auto mb-6 p-4 bg-white/80 rounded-2xl shadow-lg group-hover:shadow-xl transition-all duration-300 relative z-10 group-hover:scale-110">
-                  <IconComponent className="w-10 h-10 text-gray-700 group-hover:text-blue-600 transition-colors duration-300" />
-                </div>
-
-                {/* Title */}
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center relative z-10">
-                  {card.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-gray-600 text-base leading-relaxed text-center relative z-10 px-2">
-                  {card.desc}
-                </p>
-              </motion.div>
-            );
-          })}
-        </div>
+            {/* Desc */}
+            <p
+              style={{
+                fontSize: "0.9375rem",
+                lineHeight: 1.7,
+                color: "var(--text-secondary)",
+                margin: 0,
+              }}
+            >
+              {card.desc}
+            </p>
+          </motion.div>
+        ))}
       </div>
-    </section>
-  );
-};
+
+      {/* Bottom strip */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.4, duration: 0.6 }}
+        style={{
+          marginTop: "4rem",
+          padding: "2rem 2.5rem",
+          background: "var(--bg-card)",
+          border: "1px solid var(--border)",
+          borderRadius: "1rem",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "2rem",
+          flexWrap: "wrap",
+        }}
+      >
+        <div>
+          <p
+            style={{
+              fontSize: "1.0625rem",
+              fontWeight: 600,
+              color: "var(--text-primary)",
+              marginBottom: "0.25rem",
+              letterSpacing: "-0.02em",
+            }}
+          >
+            Ready to build something remarkable?
+          </p>
+          <p
+            style={{
+              fontSize: "0.9rem",
+              color: "var(--text-secondary)",
+              margin: 0,
+            }}
+          >
+            From initial concept to production deployment — we handle the full
+            journey.
+          </p>
+        </div>
+        <motion.button
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
+          onClick={() =>
+            document
+              .getElementById("contact")
+              ?.scrollIntoView({ behavior: "smooth" })
+          }
+          className="btn-primary"
+          style={{ whiteSpace: "nowrap", flexShrink: 0 }}
+        >
+          Start a Conversation
+        </motion.button>
+      </motion.div>
+    </div>
+  </section>
+);
 
 export default About;

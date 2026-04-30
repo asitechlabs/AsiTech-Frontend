@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { Menu, Moon, Sun, X } from "lucide-react";
+import { useEffect, useState } from "react";
 
-const sections = ["home", "about","features", "tools", "contact"];
+const sections = ["home", "about", "features", "tools", "contact"];
 
-const Navbar = () => {
+const Navbar = ({ theme, toggleTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
@@ -13,33 +14,22 @@ const Navbar = () => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
       const height = document.body.scrollHeight - window.innerHeight;
-
-      setScrolled(scrollTop > 20);
-      setScrollProgress((scrollTop / height) * 100);
+      setScrolled(scrollTop > 30);
+      setScrollProgress(height > 0 ? (scrollTop / height) * 100 : 0);
     };
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
-    window.addEventListener("scroll", handleScroll);
-
-    // Scroll Spy Logic
-    const observerOptions = {
-      root: null,
-      rootMargin: "-20% 0px -70% 0px", // Detect when section is roughly in the top part of the viewport
-      threshold: 0,
-    };
-
-    const observerCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-    sections.forEach((section) => {
-      const element = document.getElementById(section);
-      if (element) observer.observe(element);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActiveSection(e.target.id);
+        });
+      },
+      { rootMargin: "-20% 0px -70% 0px", threshold: 0 },
+    );
+    sections.forEach((s) => {
+      const el = document.getElementById(s);
+      if (el) observer.observe(el);
     });
 
     return () => {
@@ -58,114 +48,290 @@ const Navbar = () => {
     <>
       {/* Progress bar */}
       <motion.div
-        className="fixed top-0 left-0 h-1 bg-blue-600 z-[99999]"
-        initial={{ width: 0 }}
-        animate={{ width: `${scrollProgress}%` }}
+        className="fixed top-0 left-0 h-[2px] z-[99999]"
+        style={{ background: "var(--brand)", width: `${scrollProgress}%` }}
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
       />
 
-      {/* NAVBAR */}
       <nav
-        className={`fixed top-0 left-0 w-full z-[99998] transition-all duration-300 ${
-          scrolled
-            ? "bg-white/90 backdrop-blur-xl shadow-md py-2"
-            : "bg-white/60 backdrop-blur-md py-4"
-        }`}
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          zIndex: 99998,
+          background: scrolled ? "var(--nav-bg)" : "transparent",
+          backdropFilter: scrolled ? "blur(16px)" : "none",
+          boxShadow: scrolled ? "var(--shadow-sm)" : "none",
+          borderBottom: scrolled
+            ? "1px solid var(--border)"
+            : "1px solid transparent",
+          transition: "all 0.3s ease",
+        }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-
+        <div
+          style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 1.5rem" }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              height: "68px",
+            }}
+          >
             {/* Logo */}
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               onClick={() => handleNavClick("home")}
-              className="flex items-center gap-2"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "0.625rem",
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                padding: 0,
+              }}
             >
               <img
                 src="https://scontent.fjkr2-1.fna.fbcdn.net/v/t39.30808-6/652354329_122119029831182352_7674516002346519096_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=l_y4Yl2-hzsQ7kNvwH7M6il&_nc_oc=AdpgkyHOMY24RMltKkwgz3_QpECSLshAT1SniX9Yp2gL3JIwzf-TS91mhHOggwVwews&_nc_zt=23&_nc_ht=scontent.fjkr2-1.fna&_nc_gid=UpvDZ1FLqfkrxeH8yoHEGg&_nc_ss=7b2a8&oh=00_Af3IvMg4D8fkPmlxZh5-s0sJhER7M3vjQ46t-ikMqeM_iQ&oe=69F8AB0F"
-                className="h-9 sm:h-10 md:h-12"
-                alt="logo"
+                alt="AsiTech"
+                style={{
+                  height: "36px",
+                  width: "36px",
+                  borderRadius: "8px",
+                  objectFit: "cover",
+                }}
               />
-              <span className="text-lg sm:text-xl font-bold">
-                ASI TECH
+              <span
+                style={{
+                  fontSize: "1.1rem",
+                  fontWeight: 700,
+                  color: "var(--text-primary)",
+                  letterSpacing: "-0.02em",
+                  fontFamily: "var(--font-sans)",
+                }}
+              >
+                ASI<span style={{ color: "var(--brand)" }}>TECH</span>
               </span>
             </motion.button>
 
-            {/* Desktop menu */}
-            <div className="hidden md:flex gap-8 text-sm font-medium ">
-              {sections.slice(0, 5).map((sec) => (
+            {/* Desktop Nav */}
+            <div
+              style={{ display: "flex", alignItems: "center", gap: "0.25rem" }}
+              className="hidden-mobile"
+            >
+              {sections.map((sec) => (
                 <button
                   key={sec}
                   onClick={() => handleNavClick(sec)}
-                  className={`relative text-gray-700 hover:text-blue-600 transition-colors duration-300 ${
-                    activeSection === sec ? "text-blue-600" : ""
-                  }`}
+                  style={{
+                    position: "relative",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    padding: "0.5rem 0.875rem",
+                    fontSize: "0.875rem",
+                    fontWeight: activeSection === sec ? 600 : 500,
+                    color:
+                      activeSection === sec
+                        ? "var(--brand)"
+                        : "var(--text-secondary)",
+                    fontFamily: "var(--font-sans)",
+                    borderRadius: "6px",
+                    transition: "color 0.2s ease",
+                  }}
+                  className="nav-btn"
+                  onMouseEnter={(e) => {
+                    if (activeSection !== sec)
+                      e.currentTarget.style.color = "var(--text-primary)";
+                  }}
+                  onMouseLeave={(e) => {
+                    if (activeSection !== sec)
+                      e.currentTarget.style.color = "var(--text-secondary)";
+                  }}
                 >
                   {sec.charAt(0).toUpperCase() + sec.slice(1)}
                   {activeSection === sec && (
                     <motion.div
-                      layoutId="activeTab"
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-blue-600"
+                      layoutId="nav-indicator"
+                      style={{
+                        position: "absolute",
+                        bottom: "4px",
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                        width: "16px",
+                        height: "2px",
+                        background: "var(--brand)",
+                        borderRadius: "2px",
+                      }}
                     />
                   )}
                 </button>
               ))}
 
+              <div
+                style={{
+                  width: "1px",
+                  height: "20px",
+                  background: "var(--border)",
+                  margin: "0 0.5rem",
+                }}
+              />
+
+              {/* Theme Toggle */}
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => handleNavClick("contact")}
-                className={`px-4 py-2 rounded-lg shadow-md transition-colors duration-300 ${
-                  activeSection === "contact"
-                    ? "bg-blue-700 text-white ring-2 ring-blue-300"
-                    : "bg-blue-600 text-white"
-                }`}
+                onClick={toggleTheme}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "36px",
+                  height: "36px",
+                  background: "var(--bg-card-alt)",
+                  border: "1px solid var(--border)",
+                  borderRadius: "8px",
+                  cursor: "pointer",
+                  color: "var(--text-secondary)",
+                  transition: "all 0.2s ease",
+                }}
               >
-                Contact
+                {theme === "light" ? <Moon size={16} /> : <Sun size={16} />}
+              </motion.button>
+
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => handleNavClick("contact")}
+                className="btn-primary"
+                style={{
+                  marginLeft: "0.5rem",
+                  padding: "0.5rem 1.25rem",
+                  fontSize: "0.875rem",
+                }}
+              >
+                Get in Touch
               </motion.button>
             </div>
 
-            {/* Mobile button */}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden text-2xl z-100000"
+            {/* Mobile controls */}
+            <div
+              style={{ display: "flex", alignItems: "center", gap: "0.625rem" }}
+              className="mobile-only"
             >
-              {isOpen ? "✕" : "☰"}
-            </button>
+              <motion.button
+                whileTap={{ scale: 0.95 }}
+                onClick={toggleTheme}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "36px",
+                  height: "36px",
+                  background: "var(--bg-card-alt)",
+                  border: "1px solid var(--border)",
+                  borderRadius: "8px",
+                  cursor: "pointer",
+                  color: "var(--text-secondary)",
+                }}
+              >
+                {theme === "light" ? <Moon size={16} /> : <Sun size={16} />}
+              </motion.button>
+              <motion.button
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setIsOpen(!isOpen)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "36px",
+                  height: "36px",
+                  background: "var(--bg-card-alt)",
+                  border: "1px solid var(--border)",
+                  borderRadius: "8px",
+                  cursor: "pointer",
+                  color: "var(--text-primary)",
+                }}
+              >
+                {isOpen ? <X size={18} /> : <Menu size={18} />}
+              </motion.button>
+            </div>
           </div>
         </div>
       </nav>
 
-      {/* MOBILE MENU */}
+      {/* Mobile menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed top-16 left-0 w-full bg-white shadow-xl md:hidden z-[99997] overflow-y-auto max-h-[calc(100vh-64px)]"
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            style={{
+              position: "fixed",
+              top: "68px",
+              left: 0,
+              right: 0,
+              background: "var(--bg-card)",
+              borderBottom: "1px solid var(--border)",
+              boxShadow: "var(--shadow-lg)",
+              zIndex: 99997,
+              padding: "1rem 1.5rem 1.5rem",
+            }}
+            className="mobile-only"
           >
-            <div className="flex flex-col p-6 space-y-4">
-              {sections.map((sec) => (
-                <motion.button
-                  key={sec}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 }}
-                  onClick={() => handleNavClick(sec)}
-                  className={`text-left text-lg py-2 border-b border-gray-100 transition-colors ${
-                    activeSection === sec ? "text-blue-600 font-bold" : "text-gray-700"
-                  }`}
-                >
-                  {sec.charAt(0).toUpperCase() + sec.slice(1)}
-                </motion.button>
-              ))}
-            </div>
+            {sections.map((sec, i) => (
+              <motion.button
+                key={sec}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.05 }}
+                onClick={() => handleNavClick(sec)}
+                style={{
+                  display: "block",
+                  width: "100%",
+                  textAlign: "left",
+                  padding: "0.875rem 0",
+                  background: "none",
+                  border: "none",
+                  borderBottom: "1px solid var(--border-subtle)",
+                  fontSize: "0.9375rem",
+                  fontWeight: activeSection === sec ? 600 : 400,
+                  color:
+                    activeSection === sec
+                      ? "var(--brand)"
+                      : "var(--text-secondary)",
+                  fontFamily: "var(--font-sans)",
+                  cursor: "pointer",
+                }}
+              >
+                {sec.charAt(0).toUpperCase() + sec.slice(1)}
+              </motion.button>
+            ))}
+            <button
+              onClick={() => handleNavClick("contact")}
+              className="btn-primary"
+              style={{
+                marginTop: "1rem",
+                width: "100%",
+                justifyContent: "center",
+              }}
+            >
+              Get in Touch
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
+
+      <style>{`
+        @media (min-width: 769px) { .mobile-only { display: none !important; } }
+        @media (max-width: 768px) { .hidden-mobile { display: none !important; } }
+      `}</style>
     </>
   );
 };

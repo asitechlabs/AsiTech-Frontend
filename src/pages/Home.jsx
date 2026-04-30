@@ -1,35 +1,20 @@
-import React from 'react';
-import Hero from '../components/Hero';
-import Features from '../components/Features';
-import ToolsSection from '../components/ToolsSection';
-import About from '../components/About';
-import Contact from '../components/Contact';
-import Footer from '../components/Footer';
+import About from "../components/About";
+import Contact from "../components/Contact";
+import Features from "../components/Features";
+import Footer from "../components/Footer";
+import Hero from "../components/Hero";
+import Stats from "../components/Stats";
+import ToolsSection from "../components/ToolsSection";
 
 const Home = () => {
   return (
-    <main className="flex flex-col">
-      {/* Note: IDs like "features", "tools", etc., should be inside 
-          their respective components or wrapped in divs here 
-      */}
+    <main>
       <Hero />
-      
-      <div id="features" className="scroll-mt-20">
-        <Features />
-      </div>
-
-      <div id="tools" className="scroll-mt-20">
-        <ToolsSection />
-      </div>
-
-      <div id="about" className="scroll-mt-20">
-        <About />
-      </div>
-
-      <div id="contact" className="scroll-mt-20">
-        <Contact />
-      </div>
-
+      <About />
+      <Features />
+      <ToolsSection />
+      <Stats />
+      <Contact />
       <Footer />
     </main>
   );

@@ -1,177 +1,404 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { FiSend } from 'react-icons/fi';
-import emailjs from '@emailjs/browser';
+import emailjs from "@emailjs/browser";
+import { motion } from "framer-motion";
+import { Mail, MapPin, Phone, Send } from "lucide-react";
+import { useState } from "react";
+
+const mapSrc =
+  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4486.301677318353!2d85.29848507105801!3d27.67212832306894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xaa4ab8369e1e172d%3A0xc8cd87e8ab9e1ada!2sASI%20logistics!5e0!3m2!1sen!2snp!4v1776417494418!5m2!1sen!2snp";
+
+const contactDetails = [
+  {
+    Icon: Mail,
+    label: "Email",
+    value: "asi.research@gmail.com",
+    href: "mailto:asi.research@gmail.com",
+  },
+  {
+    Icon: Phone,
+    label: "Phone",
+    value: "+977 9768552107",
+    href: "tel:+9779768552107",
+  },
+  {
+    Icon: MapPin,
+    label: "Address",
+    value: "Bagdol, Lalitpur, Nepal",
+    href: "https://www.google.com/maps?q=Bagdol+Lalitpur+Nepal",
+  },
+];
 
 const Contact = () => {
-  // Form state
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
+    name: "",
+    email: "",
+    message: "",
   });
+  const [status, setStatus] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  // Status
-  const [status, setStatus] = useState('');
+  const handleChange = (e) =>
+    setFormData((p) => ({ ...p, [e.target.name]: e.target.value }));
 
-  // Handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    setStatus('Sending...');
+    setLoading(true);
+    setStatus("");
 
-    const serviceID = "service_v46keqo";
-    const templateID = "template_eyf54tc";
-    const publicKey = "AtoLUlc898Wti45To";
-
-    const templateParams = {
-      name: formData.name,
-      email: formData.email,
-      message: formData.message
-    };
-
-    emailjs.send(serviceID, templateID, templateParams, publicKey)
+    emailjs
+      .send(
+        "service_v46keqo",
+        "template_eyf54tc",
+        {
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        },
+        "AtoLUlc898Wti45To",
+      )
       .then(() => {
-        setStatus('Sent successfully! 🎉');
-        setFormData({ name: '', email: '', message: '' });
+        setStatus("success");
+        setFormData({ name: "", email: "", message: "" });
       })
-      .catch((error) => {
-        console.error(error);
-        setStatus('Failed to send message ❌');
-      });
+      .catch(() => setStatus("error"))
+      .finally(() => setLoading(false));
   };
 
-  // Google Map link
-  const mapSrc =
-"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4486.301677318353!2d85.29848507105801!3d27.67212832306894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xaa4ab8369e1e172d%3A0xc8cd87e8ab9e1ada!2sASI%20logistics!5e0!3m2!1sen!2snp!4v1776417494418!5m2!1sen!2snp" 
+  const inputStyle = {
+    width: "100%",
+    padding: "0.75rem 1rem",
+    background: "var(--bg-subtle)",
+    border: "1px solid var(--border)",
+    borderRadius: "0.625rem",
+    fontSize: "0.9375rem",
+    color: "var(--text-primary)",
+    fontFamily: "var(--font-sans)",
+    outline: "none",
+    transition: "border-color 0.2s ease, box-shadow 0.2s ease",
+    boxSizing: "border-box",
+  };
+
   return (
     <section
       id="contact"
-      className="relative py-2 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-white to-gray-300"
+      className="section-pad"
+      style={{ background: "var(--bg-subtle)" }}
     >
-
-      {/* Background glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-32 -left-32 w-72 h-72 bg-blue-200 blur-3xl opacity-30 rounded-full" />
-        <div className="absolute -bottom-32 -right-32 w-72 h-72 bg-indigo-200 blur-3xl opacity-30 rounded-full" />
-      </div>
-
-      <div className="relative max-w-6xl mx-auto">
-
-        {/* Heading */}
-        <div className="text-center mb-4">
-          <span className="text-xs font-semibold tracking-widest text-blue-600 bg-blue-50 px-4 py-1 rounded-full uppercase">
+      <div
+        style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 1.5rem" }}
+      >
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          style={{ marginBottom: "3.5rem" }}
+        >
+          <span
+            className="label-chip"
+            style={{ marginBottom: "1.25rem", display: "inline-flex" }}
+          >
             Contact Us
           </span>
-
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mt-4">
-            Start Your Project Journey With Us
+          <h2 className="section-title" style={{ marginBottom: "1rem" }}>
+            Start Your Project Journey
           </h2>
-
-          <p className="text-gray-600 mt-4 max-w-2xl mx-auto text-sm sm:text-base">
-            Share your idea, requirements, or collaboration request.
-            We build modern and scalable digital solutions.
+          <p className="section-subtitle">
+            Share your idea, requirements, or collaboration request — and we'll
+            get back to you with a clear, no-obligation proposal within 24
+            hours.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Form + Map */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-
-          {/* FORM */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="bg-white/70 backdrop-blur-xl border border-gray-200 shadow-xl rounded-2xl p-6 sm:p-10"
+        {/* Layout */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gap: "2rem",
+            alignItems: "start",
+          }}
+        >
+          {/* LEFT: contact info + map */}
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
           >
-            <h3 className="text-xl font-semibold text-center mb-6">
-              Send a Message
-            </h3>
-
-            <form onSubmit={handleSubmit} className="space-y-5">
-              {[
-                { type: 'text', placeholder: 'Your Name', value: 'name' },
-                { type: 'email', placeholder: 'Your Email', value: 'email' },
-              ].map((field, i) => (
-                <motion.div
-                  key={field.value}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * i }}
-                >
-                  <input
-                    type={field.type}
-                    placeholder={field.placeholder}
-                    value={formData[field.value]}
-                    onChange={(e) =>
-                      setFormData({ ...formData, [field.value]: e.target.value })
+            {/* Contact details */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55 }}
+              style={{
+                background: "var(--bg-card)",
+                border: "1px solid var(--border)",
+                borderRadius: "1rem",
+                padding: "1.75rem",
+              }}
+            >
+              <h3
+                style={{
+                  fontSize: "1rem",
+                  fontWeight: 700,
+                  color: "var(--text-primary)",
+                  marginBottom: "1.5rem",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                Get in Touch Directly
+              </h3>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "1.125rem",
+                }}
+              >
+                {contactDetails.map(({ Icon, label, value, href }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target={label === "Address" ? "_blank" : undefined}
+                    rel="noreferrer"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.875rem",
+                      textDecoration: "none",
+                      color: "var(--text-secondary)",
+                      fontSize: "0.9rem",
+                      transition: "color 0.2s ease",
+                    }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.color = "var(--brand)")
                     }
-                    className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-100 outline-none transition-all"
-                    required
-                  />
-                </motion.div>
-              ))}
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.color = "var(--text-secondary)")
+                    }
+                  >
+                    <span
+                      style={{
+                        width: "36px",
+                        height: "36px",
+                        background: "var(--brand-dim)",
+                        border: "1px solid var(--brand-mid)",
+                        borderRadius: "8px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "var(--brand)",
+                        flexShrink: 0,
+                      }}
+                    >
+                      <Icon size={16} />
+                    </span>
+                    <span>
+                      <div
+                        style={{
+                          fontSize: "0.75rem",
+                          color: "var(--text-tertiary)",
+                          fontFamily: "var(--font-mono)",
+                          letterSpacing: "0.06em",
+                          textTransform: "uppercase",
+                        }}
+                      >
+                        {label}
+                      </div>
+                      <div style={{ fontWeight: 500 }}>{value}</div>
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                <textarea
-                  rows="5"
-                  placeholder="Your Message"
-                  value={formData.message}
-                  onChange={(e) =>
-                    setFormData({ ...formData, message: e.target.value })
-                  }
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl resize-none focus:ring-4 focus:ring-blue-100 outline-none transition-all"
-                  required
-                />
-              </motion.div>
-
-              {/* Status */}
-              {status && (
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="text-center text-sm font-medium text-blue-600"
-                >
-                  {status}
-                </motion.p>
-              )}
-
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                type="submit"
-                className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition shadow-lg"
-              >
-                <FiSend />
-                Send Message
-              </motion.button>
-            </form>
-          </motion.div>
-
-          {/* MAP */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="w-full"
-          >
-            <div className="w-full h-[300px] sm:h-[400px] lg:h-full min-h-[400px] rounded-2xl overflow-hidden shadow-lg border border-gray-200">
+            {/* Map */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, delay: 0.1 }}
+              style={{
+                borderRadius: "1rem",
+                overflow: "hidden",
+                border: "1px solid var(--border)",
+                height: "240px",
+              }}
+            >
               <iframe
-                title="Company Location Map"
+                title="AsiTech Location"
                 src={mapSrc}
-                className="w-full h-full transition-all duration-700"
+                style={{ width: "100%", height: "100%", border: "none" }}
                 loading="lazy"
                 allowFullScreen
                 referrerPolicy="no-referrer-when-downgrade"
               />
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
 
+          {/* RIGHT: Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55 }}
+            style={{
+              background: "var(--bg-card)",
+              border: "1px solid var(--border)",
+              borderRadius: "1rem",
+              padding: "2rem",
+            }}
+          >
+            <h3
+              style={{
+                fontSize: "1rem",
+                fontWeight: 700,
+                color: "var(--text-primary)",
+                marginBottom: "0.375rem",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              Send a Message
+            </h3>
+            <p
+              style={{
+                fontSize: "0.875rem",
+                color: "var(--text-secondary)",
+                marginBottom: "1.75rem",
+              }}
+            >
+              We typically respond within one business day.
+            </p>
+
+            <form
+              onSubmit={handleSubmit}
+              style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+            >
+              {[
+                { name: "name", type: "text", placeholder: "Your full name" },
+                { name: "email", type: "email", placeholder: "your@email.com" },
+              ].map((field) => (
+                <div key={field.name}>
+                  <label
+                    style={{
+                      display: "block",
+                      fontSize: "0.8125rem",
+                      fontWeight: 500,
+                      color: "var(--text-secondary)",
+                      marginBottom: "0.375rem",
+                      textTransform: "capitalize",
+                    }}
+                  >
+                    {field.name}
+                  </label>
+                  <input
+                    type={field.type}
+                    name={field.name}
+                    placeholder={field.placeholder}
+                    value={formData[field.name]}
+                    onChange={handleChange}
+                    required
+                    style={inputStyle}
+                    onFocus={(e) => {
+                      e.target.style.borderColor = "var(--brand)";
+                      e.target.style.boxShadow = "0 0 0 3px var(--brand-dim)";
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = "var(--border)";
+                      e.target.style.boxShadow = "none";
+                    }}
+                  />
+                </div>
+              ))}
+
+              <div>
+                <label
+                  style={{
+                    display: "block",
+                    fontSize: "0.8125rem",
+                    fontWeight: 500,
+                    color: "var(--text-secondary)",
+                    marginBottom: "0.375rem",
+                  }}
+                >
+                  Message
+                </label>
+                <textarea
+                  name="message"
+                  rows={5}
+                  placeholder="Tell us about your project, goals, and timeline..."
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  style={{ ...inputStyle, resize: "vertical" }}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = "var(--brand)";
+                    e.target.style.boxShadow = "0 0 0 3px var(--brand-dim)";
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = "var(--border)";
+                    e.target.style.boxShadow = "none";
+                  }}
+                />
+              </div>
+
+              {/* Status */}
+              {status && (
+                <motion.div
+                  initial={{ opacity: 0, y: -6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  style={{
+                    padding: "0.75rem 1rem",
+                    borderRadius: "0.625rem",
+                    fontSize: "0.875rem",
+                    fontWeight: 500,
+                    background:
+                      status === "success"
+                        ? "rgba(34,197,94,0.1)"
+                        : "rgba(239,68,68,0.1)",
+                    border: `1px solid ${status === "success" ? "rgba(34,197,94,0.3)" : "rgba(239,68,68,0.3)"}`,
+                    color: status === "success" ? "#16a34a" : "#dc2626",
+                  }}
+                >
+                  {status === "success"
+                    ? "✓ Message sent successfully. We'll be in touch shortly."
+                    : "✕ Something went wrong. Please try again or email us directly."}
+                </motion.div>
+              )}
+
+              <motion.button
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.98 }}
+                type="submit"
+                disabled={loading}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "0.5rem",
+                  background: loading ? "var(--text-tertiary)" : "var(--brand)",
+                  color: "#fff",
+                  fontWeight: 600,
+                  fontSize: "0.9375rem",
+                  padding: "0.875rem 1.5rem",
+                  borderRadius: "0.625rem",
+                  border: "none",
+                  cursor: loading ? "not-allowed" : "pointer",
+                  fontFamily: "var(--font-sans)",
+                  boxShadow: loading
+                    ? "none"
+                    : "0 4px 14px rgba(37,99,235,0.3)",
+                  transition: "background 0.2s ease",
+                }}
+              >
+                {loading ? (
+                  "Sending..."
+                ) : (
+                  <>
+                    <Send size={15} /> Send Message
+                  </>
+                )}
+              </motion.button>
+            </form>
+          </motion.div>
         </div>
       </div>
     </section>

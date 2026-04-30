@@ -11,14 +11,14 @@ const jobsData = [
     title: "Backend Developer",
     type: "Full Time",
     location: "Kathmandu",
-    deadline: "2026-04-28", // expired
+    deadline: "2026-04-28",
   },
   {
     id: 3,
     title: "UI/UX Designer",
     type: "Internship",
     location: "Hybrid",
-    deadline: "2026-04-10", // expired > 1 week → will be removed
+    deadline: "2026-04-10",
   },
 ];
 
