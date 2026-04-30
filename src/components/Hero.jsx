@@ -154,7 +154,7 @@ const Hero = ({ theme }) => {
                 animation: "pulse-dot 2s infinite",
               }}
             />
-            Nepal's Emerging Technology Partner
+             Emerging Technology
           </span>
         </motion.div>
 
@@ -185,6 +185,7 @@ const Hero = ({ theme }) => {
               fontWeight: 800,
             }}
           >
+            ASITech
             <br />
             Asi Tech
           </span>

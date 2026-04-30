@@ -244,7 +244,7 @@ const Footer = () => {
                 fontFamily: "var(--font-mono)",
               }}
             >
-              Navigation
+              Quick Links
             </h4>
             <ul
               style={{
@@ -421,7 +421,7 @@ const Footer = () => {
           >
             © {year} AsiTech. All rights reserved.
           </span>
-          <span
+          {/* <span
             style={{
               fontSize: "0.8125rem",
               color: "var(--text-tertiary)",
@@ -429,7 +429,7 @@ const Footer = () => {
             }}
           >
             Built with React · Tailwind · Framer Motion
-          </span>
+          </span> */}
         </div>
       </div>
 
