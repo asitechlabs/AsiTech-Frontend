@@ -1,10 +1,10 @@
 import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Phone, Send } from "lucide-react";
+import { Contact2, Mail, MapPin, Phone, Send } from "lucide-react";
 import { useState } from "react";
 
 const mapSrc =
-  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4486.301677318353!2d85.29848507105801!3d27.67212832306894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xaa4ab8369e1e172d%3A0xc8cd87e8ab9e1ada!2sASI%20logistics!5e0!3m2!1sen!2snp!4v1776417494418!5m2!1sen!2snp";
+  "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d220.841674042465!2d85.30071020436857!3d27.671964377869376!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x42a69446721c7583%3A0xb6e603b7d680cd4e!2sAsi%20Tech!5e0!3m2!1sen!2snp!4v1777544297101!5m2!1sen!2snp";
 
 const contactDetails = [
   {
@@ -12,6 +12,11 @@ const contactDetails = [
     label: "Email",
     value: "asi.research@gmail.com",
     href: "mailto:asi.research@gmail.com",
+  },
+  {
+    Icon: Phone,
+    label: "Contact",
+    value: "+977 9768552107",
   },
   {
     Icon: MapPin,
@@ -271,10 +276,10 @@ const Contact = () => {
               {[
                 { name: "name", type: "text", placeholder: "Your full name" },
                 { name: "email", type: "email", placeholder: "your@email.com" },
-                { 
-                  name: "phone", 
-                  type: "tel", 
-                  placeholder: "+977 1234567890" 
+                {
+                  name: "phone",
+                  type: "tel",
+                  placeholder: "+977 1234567890",
                 },
               ].map((field) => (
                 <div key={field.name}>

@@ -188,7 +188,9 @@ const Footer = () => {
             </p>
             <div style={{ display: "flex", gap: "0.75rem" }}>
               {[
-                { href: "#", Icon: FiLinkedin },
+                { href: "https://www.linkedin.com/company/technology-asi/  ", Icon: FiLinkedin },
+
+ 
                 {
                   href: "https://www.facebook.com/profile.php?id=61585470568856",
                   Icon: FiFacebook,
