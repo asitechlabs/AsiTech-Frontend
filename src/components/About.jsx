@@ -90,13 +90,9 @@ const About = () => (
               padding: "2rem",
               position: "relative",
               overflow: "hidden",
-              transition: "box-shadow 0.25s ease, border-color 0.25s ease",
               cursor: "default",
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = "var(--shadow-lg)";
-              e.currentTarget.style.borderColor = card.accent;
-            }}
+    
             onMouseLeave={(e) => {
               e.currentTarget.style.boxShadow = "none";
               e.currentTarget.style.borderColor = "var(--border)";

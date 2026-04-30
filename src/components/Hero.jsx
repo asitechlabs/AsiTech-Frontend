@@ -135,7 +135,7 @@ const Hero = () => {
                 animation: "pulse-dot 2s infinite",
               }}
             />
-            Nepal's Emerging Technology Partner
+             Emerging Technology
           </span>
         </motion.div>
 
