@@ -25,7 +25,7 @@ const App = () => {
       <Navbar theme={theme} toggleTheme={toggleTheme} />
 
       <section id="home">
-        <Hero />
+        <Hero theme={theme} />
       </section>
 
       <section id="about">
