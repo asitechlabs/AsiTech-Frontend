@@ -40,7 +40,7 @@ const App = () => {
         <ToolsSection />
       </section>
 
-      <Stats />
+      {/* <Stats /> */}
 
       <section id="contact">
         <Contact />

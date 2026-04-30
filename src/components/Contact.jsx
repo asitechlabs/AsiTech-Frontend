@@ -14,12 +14,6 @@ const contactDetails = [
     href: "mailto:asi.research@gmail.com",
   },
   {
-    Icon: Phone,
-    label: "Phone",
-    value: "+977 9768552107",
-    href: "tel:+9779768552107",
-  },
-  {
     Icon: MapPin,
     label: "Address",
     value: "Bagdol, Lalitpur, Nepal",
@@ -31,6 +25,7 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     message: "",
   });
   const [status, setStatus] = useState("");
@@ -51,13 +46,14 @@ const Contact = () => {
         {
           name: formData.name,
           email: formData.email,
+          phone: formData.phone,
           message: formData.message,
         },
         "AtoLUlc898Wti45To",
       )
       .then(() => {
         setStatus("success");
-        setFormData({ name: "", email: "", message: "" });
+        setFormData({ name: "", email: "", phone: "", message: "" });
       })
       .catch(() => setStatus("error"))
       .finally(() => setLoading(false));
@@ -158,7 +154,7 @@ const Contact = () => {
                     key={label}
                     href={href}
                     target={label === "Address" ? "_blank" : undefined}
-                    rel="noreferrer"
+                    rel={label === "Address" ? "noreferrer" : undefined}
                     style={{
                       display: "flex",
                       alignItems: "center",
@@ -265,7 +261,7 @@ const Contact = () => {
                 marginBottom: "1.75rem",
               }}
             >
-              We typically respond within one business day.
+              Fill out the form below and we'll get back to you within 24 hours.
             </p>
 
             <form
@@ -275,6 +271,11 @@ const Contact = () => {
               {[
                 { name: "name", type: "text", placeholder: "Your full name" },
                 { name: "email", type: "email", placeholder: "your@email.com" },
+                { 
+                  name: "phone", 
+                  type: "tel", 
+                  placeholder: "+977 1234567890" 
+                },
               ].map((field) => (
                 <div key={field.name}>
                   <label
@@ -295,7 +296,7 @@ const Contact = () => {
                     placeholder={field.placeholder}
                     value={formData[field.name]}
                     onChange={handleChange}
-                    required
+                    required={field.name !== "phone"} // Phone is optional
                     style={inputStyle}
                     onFocus={(e) => {
                       e.target.style.borderColor = "var(--brand)";

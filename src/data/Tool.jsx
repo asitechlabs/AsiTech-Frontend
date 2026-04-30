@@ -7,7 +7,11 @@ import {
   SiNodedotjs,
   SiPython,
   SiReact,
+  SiVuedotjs,  // ✅ Correct import for Vue.js
   SiSharp,
+  SiBootstrap,     // ✅ Bootstrap
+
+  SiPostgresql,
   SiTailwindcss,
 } from "react-icons/si";
 
@@ -17,6 +21,13 @@ export const toolUsed = [
     description:
       "Architecting modern, high-performance SPAs with reusable component logic and reactive state management.",
     icon: <SiReact className="text-[#61DAFB]" />,
+    category: "Frontend",
+  },
+  {
+    name: "Vue.js",
+    description:
+      "Building progressive, intuitive web applications with a flexible component system and reactive data binding.",
+    icon: <SiVuedotjs className="text-[#42B883]" />,  // ✅ Using SiVuedotjs
     category: "Frontend",
   },
   {
@@ -69,6 +80,13 @@ export const toolUsed = [
     category: "Database",
   },
   {
+    name: "PostgreSQL",
+    description:
+      "Advanced relational database with JSON support, full-text search, and enterprise-grade reliability.",
+    icon: <SiPostgresql className="text-[#4169E1]" />,
+    category: "Database",
+  },
+  {
     name: "MySQL / SQL",
     description:
       "Managing relational databases with structured, optimised queries for efficient transactional data handling.",
@@ -80,6 +98,13 @@ export const toolUsed = [
     description:
       "Rapidly styling responsive, pixel-perfect interfaces with a utility-first CSS framework built for scale.",
     icon: <SiTailwindcss className="text-[#06B6D4]" />,
+    category: "Styling",
+  },
+  {
+    name: "Bootstrap",
+    description:
+      "Building responsive, mobile-first websites with pre-designed components and a robust grid system.",
+    icon: <SiBootstrap className="text-[#7952B3]" />,
     category: "Styling",
   },
 ];
