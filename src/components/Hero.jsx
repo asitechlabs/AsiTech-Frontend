@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import bg1 from "../assets/hero/1.jpg";
 import bg2 from "../assets/hero/2.jpg";
@@ -186,7 +186,7 @@ const Hero = ({ theme }) => {
             }}
           >
             <br />
-            Asi Tech
+            ASI Tech
           </span>
         </motion.h1>
 
@@ -219,27 +219,27 @@ const Hero = ({ theme }) => {
         </motion.div>
 
         {/* Description */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
-          style={{
-            fontSize: "clamp(0.9375rem, 1.6vw, 1.0625rem)",
-            lineHeight: 1.75,
-            color: theme === "dark" ? "rgba(148,163,184,0.95)" : "#334155",
-            maxWidth: "600px",
-            margin: "1.25rem auto 0",
-            textShadow:
-              theme === "dark"
-                ? "0 1px 8px rgba(0,0,0,0.5)"
-                : "0 1px 6px rgba(255,255,255,0.7)",
-            transition: "color 0.3s ease",
-          }}
-        >
-          Empowering your digital future through innovative IT solutions, AI
-          integration, and scalable web architectures — engineered for
-          businesses that demand excellence.
-        </motion.p>
+      <motion.p
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.7, delay: 0.4 }}
+  style={{
+    fontSize: "clamp(0.9375rem, 1.6vw, 1.0625rem)",
+    lineHeight: 1.75,
+    color: theme === "dark" ? "#E2E8F0" : "#0F172A",
+    maxWidth: "600px",
+    margin: "1.25rem auto 0",
+    textShadow:
+      theme === "dark"
+        ? "0 2px 10px rgba(0,0,0,0.7)"
+        : "0 2px 8px rgba(255,255,255,0.9)",
+    transition: "color 0.3s ease",
+  }}
+>
+  Empowering your digital future through innovative IT solutions, AI
+  integration, and scalable web architectures — engineered for
+  businesses that demand excellence.
+</motion.p>
 
         {/* CTA buttons */}
         <motion.div
@@ -417,7 +417,7 @@ const Hero = ({ theme }) => {
       </div>
 
       {/* ── Slideshow dots ── */}
-      <div
+      {/* <div
         style={{
           position: "absolute",
           bottom: "2rem",
@@ -446,8 +446,7 @@ const Hero = ({ theme }) => {
             }}
           />
         ))}
-      </div>
-
+      </div> */}
       {/* ── Scroll cue ── */}
       <motion.div
         animate={{ y: [0, 6, 0] }}
