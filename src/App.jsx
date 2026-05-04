@@ -1,56 +1,77 @@
 import { useEffect, useState } from "react";
-import About from "./components/About";
-import Contact from "./components/Contact";
-import Features from "./components/Features";
-import Footer from "./components/Footer";
-import Hero from "./components/Hero";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Stats from "./components/Stats";
-import ToolsSection from "./components/ToolsSection";
+import Footer from "./components/Footer";
 import ScrollToTopButton from "./components/ScrollToTopButton";
+
+// Pages
+import AboutPage from "./pages/AboutPage";
+import FeaturesPage from "./pages/FeaturesPage";
+import ToolsPage from "./pages/ToolsPage";
+import ContactPage from "./pages/ContactPage";
+import Home from "./pages/Home";
+
+
+
+
+
+import { BackgroundGradientAnimation } from "./components/BackgroundGradientAnimation";
 
 const App = () => {
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem("theme") || "light";
   });
+  const { pathname } = useLocation();
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
 
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   const toggleTheme = () => setTheme((t) => (t === "light" ? "dark" : "light"));
 
   return (
-    <div className="app-root">
+    <div
+      className="app-root"
+      style={{
+        background: pathname === "/" ? "transparent" : "var(--bg)",
+        transition: "background 0.3s ease",
+      }}
+    >
+      {/* ── Global Fixed Background (Home only) ── */}
+      {pathname === "/" && (
+        <BackgroundGradientAnimation
+          gradientBackgroundStart={theme === "dark" ? "rgb(8, 12, 20)" : "rgb(255, 255, 255)"}
+          gradientBackgroundEnd={theme === "dark" ? "rgb(5, 10, 20)" : "rgb(240, 244, 255)"}
+          firstColor={theme === "dark" ? "37, 99, 235" : "37, 99, 235"}
+          secondColor={theme === "dark" ? "108, 0, 162" : "14, 165, 233"}
+          thirdColor={theme === "dark" ? "0, 17, 82" : "56, 189, 248"}
+          fourthColor={theme === "dark" ? "14, 165, 233" : "186, 230, 253"}
+          fifthColor={theme === "dark" ? "8, 12, 20" : "241, 245, 249"}
+          pointerColor={theme === "dark" ? "140, 100, 255" : "37, 99, 235"}
+        />
+      )}
+
       <Navbar theme={theme} toggleTheme={toggleTheme} />
-
-      <section id="home">
-        <Hero theme={theme} />
-      </section>
-
-      <section id="about">
-        <About />
-      </section>
-
-      <section id="features">
-        <Features />
-      </section>
-
-      <section id="tools">
-        <ToolsSection />
-      </section>
-
-      {/* <Stats /> */}
-
-      <section id="contact">
-        <Contact />
-      </section>
+      
+      <Routes>
+        <Route path="/" element={<Home theme={theme} />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/features" element={<FeaturesPage />} />
+        <Route path="/tools" element={<ToolsPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+      </Routes>
 
       <Footer />
-      <ScrollToTopButton/>
+      <ScrollToTopButton />
     </div>
   );
 };
 
 export default App;
+

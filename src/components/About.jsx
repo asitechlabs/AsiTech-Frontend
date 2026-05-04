@@ -138,7 +138,7 @@ const About = () => (
                 letterSpacing: "0.1em",
                 textTransform: "uppercase",
                 color: card.accent,
-                fontFamily: "var(--font-mono)",
+                fontFamily: "var(--font-heading)",
               }}
             >
               {card.label}
@@ -148,13 +148,13 @@ const About = () => (
             <h3
               style={{
                 fontSize: "1.125rem",
-                fontWeight: 700,
+                fontWeight: 600,
                 color: "var(--text-primary)",
                 lineHeight: 1.35,
                 letterSpacing: "-0.02em",
                 margin: "0.625rem 0 0.875rem",
                 whiteSpace: "pre-line",
-                fontFamily: "var(--font-sans)",
+                fontFamily: "var(--font-heading)",
               }}
             >
               {card.title}
@@ -201,6 +201,7 @@ const About = () => (
               fontWeight: 600,
               color: "var(--text-primary)",
               marginBottom: "0.25rem",
+              fontFamily: "var(--font-heading)",
               letterSpacing: "-0.02em",
             }}
           >

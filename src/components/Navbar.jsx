@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, Moon, Sun, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const sections = ["home", "about", "features", "tools", "contact"];
 
@@ -9,6 +10,15 @@ const Navbar = ({ theme, toggleTheme }) => {
   const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const path = location.pathname.slice(1) || "home";
+    if (sections.includes(path)) {
+      setActiveSection(path);
+    }
+  }, [location.pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,8 +50,11 @@ const Navbar = ({ theme, toggleTheme }) => {
 
   const handleNavClick = (id) => {
     setIsOpen(false);
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    setActiveSection(id);
+    if (id === "home") {
+      navigate("/");
+    } else {
+      navigate(`/${id}`);
+    }
   };
 
   return (
@@ -74,14 +87,14 @@ const Navbar = ({ theme, toggleTheme }) => {
         }}
       >
         <div
-          style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 1.5rem" }}
+          style={{ maxWidth: "1300px", margin: "0 auto", padding: "0 2rem" }}
         >
           <div
             style={{
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              height: "68px",
+              height: "72px",
             }}
           >
             {/* Logo */}
@@ -116,7 +129,7 @@ const Navbar = ({ theme, toggleTheme }) => {
                   fontWeight: 700,
                   color: "var(--text-primary)",
                   letterSpacing: "-0.02em",
-                  fontFamily: "var(--font-sans)",
+                  fontFamily: "var(--font-heading)",
                   transition: "color 0.3s ease",
                 }}
               >
@@ -140,12 +153,12 @@ const Navbar = ({ theme, toggleTheme }) => {
                     cursor: "pointer",
                     padding: "0.5rem 0.875rem",
                     fontSize: "0.875rem",
-                    fontWeight: activeSection === sec ? 600 : 500,
+                    fontWeight: activeSection === sec ? 600 : 400,
                     color:
                       activeSection === sec
                         ? "var(--brand)"
                         : "var(--text-secondary)",
-                    fontFamily: "var(--font-sans)",
+                    fontFamily: "var(--font-heading)",
                     borderRadius: "6px",
                     transition: "color 0.2s ease",
                   }}
@@ -160,21 +173,6 @@ const Navbar = ({ theme, toggleTheme }) => {
                   }}
                 >
                   {sec.charAt(0).toUpperCase() + sec.slice(1)}
-                  {activeSection === sec && (
-                    <motion.div
-                      layoutId="nav-indicator"
-                      style={{
-                        position: "absolute",
-                        bottom: "4px",
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        width: "16px",
-                        height: "2px",
-                        background: "var(--brand)",
-                        borderRadius: "2px",
-                      }}
-                    />
-                  )}
                 </button>
               ))}
 
@@ -324,7 +322,7 @@ const Navbar = ({ theme, toggleTheme }) => {
                     activeSection === sec
                       ? "var(--brand)"
                       : "var(--text-secondary)",
-                  fontFamily: "var(--font-sans)",
+                  fontFamily: "var(--font-heading)",
                   cursor: "pointer",
                   transition: "color 0.3s ease",
                 }}

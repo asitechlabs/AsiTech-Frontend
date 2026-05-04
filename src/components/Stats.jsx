@@ -86,11 +86,11 @@ const StatCard = ({ value, suffix, label, desc, delay }) => {
       <div
         style={{
           fontSize: "clamp(2.25rem, 4vw, 3rem)",
-          fontWeight: 800,
+          fontWeight: 700,
           color: "var(--brand)",
           letterSpacing: "-0.04em",
           lineHeight: 1,
-          fontFamily: "var(--font-sans)",
+          fontFamily: "var(--font-heading)",
         }}
       >
         {count}

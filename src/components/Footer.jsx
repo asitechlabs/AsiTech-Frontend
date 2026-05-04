@@ -65,9 +65,10 @@ const Footer = () => {
             <p
               style={{
                 fontSize: "1.25rem",
-                fontWeight: 700,
+                fontWeight: 600,
                 color: "#fff",
                 marginBottom: "0.375rem",
+                fontFamily: "var(--font-heading)",
                 letterSpacing: "-0.02em",
               }}
             >
@@ -154,8 +155,9 @@ const Footer = () => {
               <span
                 style={{
                   fontSize: "1rem",
-                  fontWeight: 700,
+                  fontWeight: 600,
                   color: "var(--text-primary)",
+                  fontFamily: "var(--font-heading)",
                   letterSpacing: "-0.02em",
                 }}
               >
@@ -238,12 +240,12 @@ const Footer = () => {
             <h4
               style={{
                 fontSize: "0.8125rem",
-                fontWeight: 700,
+                fontWeight: 600,
                 letterSpacing: "0.07em",
                 textTransform: "uppercase",
                 color: "var(--text-primary)",
                 marginBottom: "1.25rem",
-                fontFamily: "var(--font-mono)",
+                fontFamily: "var(--font-heading)",
               }}
             >
               Quick Links
@@ -293,12 +295,12 @@ const Footer = () => {
             <h4
               style={{
                 fontSize: "0.8125rem",
-                fontWeight: 700,
+                fontWeight: 600,
                 letterSpacing: "0.07em",
                 textTransform: "uppercase",
                 color: "var(--text-primary)",
                 marginBottom: "1.25rem",
-                fontFamily: "var(--font-mono)",
+                fontFamily: "var(--font-heading)",
               }}
             >
               Services
@@ -332,12 +334,12 @@ const Footer = () => {
             <h4
               style={{
                 fontSize: "0.8125rem",
-                fontWeight: 700,
+                fontWeight: 600,
                 letterSpacing: "0.07em",
                 textTransform: "uppercase",
                 color: "var(--text-primary)",
                 marginBottom: "1.25rem",
-                fontFamily: "var(--font-mono)",
+                fontFamily: "var(--font-heading)",
               }}
             >
               Contact

@@ -139,7 +139,7 @@ const Contact = () => {
               <h3
                 style={{
                   fontSize: "1rem",
-                  fontWeight: 700,
+                  fontWeight: 600,
                   color: "var(--text-primary)",
                   marginBottom: "1.5rem",
                   letterSpacing: "-0.02em",
@@ -197,7 +197,7 @@ const Contact = () => {
                         style={{
                           fontSize: "0.75rem",
                           color: "var(--text-tertiary)",
-                          fontFamily: "var(--font-mono)",
+                          fontFamily: "var(--font-heading)",
                           letterSpacing: "0.06em",
                           textTransform: "uppercase",
                         }}
@@ -251,7 +251,7 @@ const Contact = () => {
             <h3
               style={{
                 fontSize: "1rem",
-                fontWeight: 700,
+                fontWeight: 600,
                 color: "var(--text-primary)",
                 marginBottom: "0.375rem",
                 letterSpacing: "-0.02em",
@@ -388,7 +388,7 @@ const Contact = () => {
                   borderRadius: "0.625rem",
                   border: "none",
                   cursor: loading ? "not-allowed" : "pointer",
-                  fontFamily: "var(--font-sans)",
+                  fontFamily: "var(--font-heading)",
                   boxShadow: loading
                     ? "none"
                     : "0 4px 14px rgba(37,99,235,0.3)",

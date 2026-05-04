@@ -1,12 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
-import bg1 from "../assets/hero/1.jpg";
-import bg2 from "../assets/hero/2.jpg";
-import bg3 from "../assets/hero/3.jpg";
-import bg4 from "../assets/hero/4.jpg";
 
-const images = [bg1, bg2, bg3, bg4];
 
 const SERVICES = [
   "Web Applications",
@@ -16,18 +11,13 @@ const SERVICES = [
 ];
 
 const Hero = ({ theme }) => {
-  const [currentImage, setCurrentImage] = useState(0);
   const [serviceIndex, setServiceIndex] = useState(0);
 
   useEffect(() => {
-    const imgTimer = setInterval(() => {
-      setCurrentImage((p) => (p + 1) % images.length);
-    }, 5000);
     const svcTimer = setInterval(() => {
       setServiceIndex((p) => (p + 1) % SERVICES.length);
     }, 2800);
     return () => {
-      clearInterval(imgTimer);
       clearInterval(svcTimer);
     };
   }, []);
@@ -40,34 +30,13 @@ const Hero = ({ theme }) => {
       style={{
         position: "relative",
         width: "100%",
-        minHeight: "100vh",
+        height: "100vh", // Perfect full screen
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         overflow: "hidden",
       }}
     >
-      {/* ── Animated background slideshow (untouched) ── */}
-      <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={currentImage}
-            src={images[currentImage]}
-            initial={{ opacity: 0, scale: 1.06 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.6, ease: "easeInOut" }}
-            alt=""
-            style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-            }}
-          />
-        </AnimatePresence>
-      </div>
 
       {/* ── Gradient overlay (untouched) ── */}
       <div
@@ -77,8 +46,8 @@ const Hero = ({ theme }) => {
           zIndex: 1,
           background:
             theme === "dark"
-              ? "linear-gradient(to bottom, rgba(5,10,20,0.85) 0%, rgba(5,10,20,0.6) 50%, rgba(5,10,20,0.95) 100%)"
-              : "linear-gradient(to bottom, rgba(255,255,255,0.14) 0%, rgba(198,183,183,0.4) 50%, rgba(255,255,255,0.19) 100%)",
+              ? "linear-gradient(to bottom, rgba(5,10,20,0.7) 0%, rgba(5,10,20,0.4) 50%, rgba(5,10,20,0.85) 100%)"
+              : "linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.3) 100%)",
           transition: "background 0.3s ease",
         }}
       />
@@ -107,7 +76,6 @@ const Hero = ({ theme }) => {
           margin: "0 auto",
           padding: "0 1.5rem",
           textAlign: "center",
-          paddingTop: "80px",
         }}
       >
         {/* Badge — glass pill */}
@@ -121,7 +89,7 @@ const Hero = ({ theme }) => {
               display: "inline-flex",
               alignItems: "center",
               gap: "0.4rem",
-              fontSize: "0.6875rem",
+              fontSize: "0.625rem", // Slightly smaller
               fontWeight: 600,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
@@ -154,7 +122,7 @@ const Hero = ({ theme }) => {
                 animation: "pulse-dot 2s infinite",
               }}
             />
-             Emerging Technology
+            Emerging Technology
           </span>
         </motion.div>
 
@@ -164,13 +132,13 @@ const Hero = ({ theme }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, delay: 0.15 }}
           style={{
-            fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
-            fontWeight: 800,
+            fontSize: "clamp(2rem, 5vw, 3.75rem)", // Reduced from 2.5-4.5rem
+            fontWeight: 500,
             color: theme === "dark" ? "#f1f5f9" : "#0f172a",
-            lineHeight: 1.1,
+            lineHeight: 1.15, // Slightly more space
             letterSpacing: "-0.04em",
-            margin: "1.25rem 0 0",
-            fontFamily: "var(--font-sans)",
+            margin: "1rem 0 0", // Reduced from 1.25rem
+            fontFamily: "var(--font-heading)",
             textShadow:
               theme === "dark"
                 ? "0 2px 24px rgba(0,0,0,0.6)"
@@ -182,7 +150,7 @@ const Hero = ({ theme }) => {
           <span
             style={{
               color: theme === "dark" ? "#ffffff" : "#2563eb",
-              fontWeight: 800,
+              fontWeight: 500,
             }}
           >
             <br />
@@ -219,27 +187,27 @@ const Hero = ({ theme }) => {
         </motion.div>
 
         {/* Description */}
-      <motion.p
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.7, delay: 0.4 }}
-  style={{
-    fontSize: "clamp(0.9375rem, 1.6vw, 1.0625rem)",
-    lineHeight: 1.75,
-    color: theme === "dark" ? "#E2E8F0" : "#0F172A",
-    maxWidth: "600px",
-    margin: "1.25rem auto 0",
-    textShadow:
-      theme === "dark"
-        ? "0 2px 10px rgba(0,0,0,0.7)"
-        : "0 2px 8px rgba(255,255,255,0.9)",
-    transition: "color 0.3s ease",
-  }}
->
-  Empowering your digital future through innovative IT solutions, AI
-  integration, and scalable web architectures — engineered for
-  businesses that demand excellence.
-</motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.4 }}
+          style={{
+            fontSize: "1rem",
+            lineHeight: 1.6,
+            color: theme === "dark" ? "#94a3b8" : "#475569",
+            maxWidth: "600px",
+            margin: "1rem auto 1.75rem",
+            textShadow:
+              theme === "dark"
+                ? "0 2px 10px rgba(0,0,0,0.7)"
+                : "0 2px 8px rgba(255,255,255,0.9)",
+            transition: "color 0.3s ease",
+          }}
+        >
+          Empowering your digital future through innovative IT solutions, AI
+          integration, and scalable web architectures — engineered for
+          businesses that demand excellence.
+        </motion.p>
 
         {/* CTA buttons */}
         <motion.div
@@ -251,7 +219,7 @@ const Hero = ({ theme }) => {
             gap: "0.875rem",
             justifyContent: "center",
             flexWrap: "wrap",
-            marginTop: "2.25rem",
+            marginTop: "1.75rem", // Reduced from 2.25rem
           }}
         >
           {/* Primary CTA — solid brand */}
@@ -266,13 +234,13 @@ const Hero = ({ theme }) => {
               background: "var(--brand)",
               color: "#fff",
               fontWeight: 600,
-              fontSize: "0.9375rem",
-              padding: "0.8125rem 1.875rem",
+              fontSize: "0.875rem",
+              padding: "0.75rem 1.625rem",
               borderRadius: "0.625rem",
               border: "none",
               cursor: "pointer",
               boxShadow: "0 4px 20px rgba(37,99,235,0.45)",
-              fontFamily: "var(--font-sans)",
+              fontFamily: "var(--font-heading)",
             }}
           >
             Explore Services <ArrowRight size={16} />
@@ -292,9 +260,9 @@ const Hero = ({ theme }) => {
                   ? "rgba(17,24,39,0.52)"
                   : "rgba(255,255,255,0.55)",
               color: theme === "dark" ? "#f1f5f9" : "#0f172a",
-              fontWeight: 500,
-              fontSize: "0.9375rem",
-              padding: "0.8125rem 1.875rem",
+              fontWeight: 600,
+              fontSize: "0.875rem",
+              padding: "0.75rem 1.625rem",
               borderRadius: "0.625rem",
               border:
                 theme === "dark"
@@ -307,7 +275,7 @@ const Hero = ({ theme }) => {
                 theme === "dark"
                   ? "0 8px 32px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.08)"
                   : "0 8px 32px rgba(0,0,0,0.10), inset 0 1px 0 rgba(255,255,255,0.8)",
-              fontFamily: "var(--font-sans)",
+              fontFamily: "var(--font-heading)",
               transition: "all 0.3s ease",
             }}
           >
@@ -325,7 +293,7 @@ const Hero = ({ theme }) => {
             alignItems: "center",
             justifyContent: "center",
             gap: "0",
-            marginTop: "3.5rem",
+            marginTop: "2.5rem", // Reduced from 3.5rem
             flexWrap: "wrap",
             background:
               theme === "dark"
@@ -355,15 +323,13 @@ const Hero = ({ theme }) => {
               left: "10%",
               right: "10%",
               height: "1px",
-              background: `linear-gradient(90deg, transparent, ${
-                theme === "dark"
+              background: `linear-gradient(90deg, transparent, ${theme === "dark"
+                ? "rgba(255,255,255,0.06)"
+                : "rgba(255,255,255,0.65)"
+                } 40%, ${theme === "dark"
                   ? "rgba(255,255,255,0.06)"
                   : "rgba(255,255,255,0.65)"
-              } 40%, ${
-                theme === "dark"
-                  ? "rgba(255,255,255,0.06)"
-                  : "rgba(255,255,255,0.65)"
-              } 60%, transparent)`,
+                } 60%, transparent)`,
               pointerEvents: "none",
             }}
           />
@@ -388,10 +354,11 @@ const Hero = ({ theme }) => {
             >
               <div
                 style={{
-                  fontSize: "1.375rem",
-                  fontWeight: 700,
+                  fontSize: "1.25rem", // Reduced from 1.375rem
+                  fontWeight: 100,
                   color: theme === "dark" ? "#f1f5f9" : "#0f172a",
                   letterSpacing: "-0.03em",
+                  fontFamily: "var(--font-heading)",
                   transition: "color 0.3s ease",
                 }}
               >

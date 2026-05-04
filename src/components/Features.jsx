@@ -128,7 +128,7 @@ const Features = () => (
                 top: "1.25rem",
                 right: "1.5rem",
                 fontSize: "0.6875rem",
-                fontFamily: "var(--font-mono)",
+                fontFamily: "var(--font-heading)",
                 color: "var(--border)",
                 userSelect: "none",
               }}
@@ -164,7 +164,7 @@ const Features = () => (
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
                 color: "var(--text-tertiary)",
-                fontFamily: "var(--font-mono)",
+                fontFamily: "var(--font-heading)",
               }}
             >
               {f.tag}
@@ -173,7 +173,7 @@ const Features = () => (
             <h3
               style={{
                 fontSize: "1.0625rem",
-                fontWeight: 700,
+                fontWeight: 600,
                 color: "var(--text-primary)",
                 letterSpacing: "-0.02em",
                 margin: "0.5rem 0 0.875rem",

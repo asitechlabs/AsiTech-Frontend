@@ -72,7 +72,7 @@ const ToolsSection = () => {
                     fontWeight: 500,
                     border: "1px solid",
                     cursor: "pointer",
-                    fontFamily: "var(--font-sans)",
+                    fontFamily: "var(--font-heading)",
                     transition: "all 0.2s ease",
                     borderColor:
                       active === cat ? "var(--brand)" : "var(--border)",
@@ -140,7 +140,7 @@ const ToolsSection = () => {
                 <h3
                   style={{
                     fontSize: "0.9375rem",
-                    fontWeight: 700,
+                    fontWeight: 600,
                     color: "var(--text-primary)",
                     letterSpacing: "-0.01em",
                     marginBottom: "0.375rem",
@@ -162,7 +162,7 @@ const ToolsSection = () => {
                     border: "1px solid var(--brand-mid)",
                     padding: "0.2rem 0.625rem",
                     borderRadius: "999px",
-                    fontFamily: "var(--font-mono)",
+                    fontFamily: "var(--font-heading)",
                     marginBottom: "0.875rem",
                   }}
                 >
@@ -206,7 +206,7 @@ const ToolsSection = () => {
           <span
             style={{
               fontSize: "0.6875rem",
-              fontFamily: "var(--font-mono)",
+              fontFamily: "var(--font-heading)",
               fontWeight: 600,
               letterSpacing: "0.1em",
               textTransform: "uppercase",
