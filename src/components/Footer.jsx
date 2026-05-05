@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import logo from "../assets/logo.png";
 import {
   FiFacebook,
   FiInstagram,
@@ -133,15 +134,14 @@ const Footer = ({ theme }) => {
               }}
             >
               <img
-                src="/logo.png"
+                src={logo}
                 alt="AsiTech"
                 style={{
                   height: "32px",
                   width: "32px",
                   borderRadius: "6px",
                   objectFit: "cover",
-                  background: theme === "dark" ? "white" : "transparent",
-                  transform: theme === "light" ? "translateY(-5px)" : "none",
+                  background: theme === "dark" ? "#fff" : "none",
                 }}
               />
               <span
