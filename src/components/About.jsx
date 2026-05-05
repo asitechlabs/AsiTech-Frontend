@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Eye, Heart, Target } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import aboutBg from "../assets/aboutusbackground.jpg";
 
 const cards = [
   {
@@ -26,50 +27,128 @@ const cards = [
   },
 ];
 
-const About = () => {
+const About = ({ theme }) => {
   const navigate = useNavigate();
   return (
     <section
       id="about"
-      className="section-pad mesh-bg"
-      style={{ background: "var(--bg-subtle)", position: "relative" }}
+      style={{ background: "var(--bg-subtle)", position: "relative", overflow: "hidden" }}
     >
+      {/* Hero Section */}
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "90vh",
+          minHeight: "600px",
+          display: "flex",
+          alignItems: "center",
+          backgroundImage: `url(${aboutBg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
+          marginBottom: "5rem",
+        }}
+      >
+        {/* Grey Overlay (Light Mode) */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: theme === "light"
+              ? "linear-gradient(to right, rgba(226, 232, 240, 0.85) 0%, rgba(226, 232, 240, 0.2) 100%)"
+              : "linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 100%)",
+            backdropFilter: "none",
+            WebkitBackdropFilter: "none",
+            zIndex: 1,
+          }}
+        />
+
+        {/* Bottom Fade (Adaptive) */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: "180px",
+            background: theme === "light"
+              ? "linear-gradient(to top, #fff, transparent)"
+              : "linear-gradient(to top, var(--bg-subtle), transparent)",
+            zIndex: 2,
+          }}
+        />
+
+        <div
+          style={{
+            maxWidth: "1200px",
+            margin: "0 auto",
+            padding: "2rem 1.5rem 0",
+            width: "100%",
+            position: "relative",
+            zIndex: 3,
+          }}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            style={{ maxWidth: "700px" }}
+          >
+            {/* <span
+              className="label-chip"
+              style={{
+                marginBottom: "1.5rem",
+                display: "inline-flex",
+                background: theme === "light" ? "rgba(37, 99, 235, 0.2)" : "rgba(255,255,255,0.1)",
+                backdropFilter: "blur(8px)",
+                color: theme === "light" ? "#1e40af" : "#fff",
+                border: theme === "light" ? "1px solid rgba(37, 99, 235, 0.3)" : "1px solid rgba(255,255,255,0.2)",
+              }}
+            >
+              About AsiTech
+            </span> */}
+            <h2
+              className="section-title"
+              style={{
+                marginBottom: "1.5rem",
+                color: theme === "light" ? "var(--text-primary)" : "#fff",
+                fontSize: "clamp(2.5rem, 5vw, 4rem)",
+                lineHeight: 1.1,
+              }}
+            >
+              Bridging Complex Problems
+              <br />
+              with Precise Digital Solutions
+            </h2>
+            <p
+              className="section-subtitle"
+              style={{
+                color: theme === "light" ? "var(--text-secondary)" : "rgba(255,255,255,0.9)",
+                fontSize: "1.125rem",
+                lineHeight: 1.6,
+                textShadow: theme === "light" ? "none" : "0 2px 4px rgba(0,0,0,0.3)",
+              }}
+            >
+              AsiTech is a software and technology firm based in Lalitpur, Nepal.
+              We specialise in full-stack web development, AI integration, and
+              enterprise system design — helping organisations at every stage
+              accelerate their digital transformation with clarity and confidence.
+            </p>
+          </motion.div>
+        </div>
+      </div>
+
       <div
         style={{
           maxWidth: "1200px",
           margin: "0 auto",
-          padding: "0 1.5rem",
+          padding: "0 1.5rem 8rem",
           position: "relative",
           zIndex: 1,
         }}
       >
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          style={{ maxWidth: "640px", marginBottom: "4rem" }}
-        >
-          <span
-            className="label-chip"
-            style={{ marginBottom: "1.25rem", display: "inline-flex" }}
-          >
-            About AsiTech
-          </span>
-          <h2 className="section-title" style={{ marginBottom: "1.25rem" }}>
-            Bridging Complex Problems
-            <br />
-            with Precise Digital Solutions
-          </h2>
-          <p className="section-subtitle">
-            AsiTech is a software and technology firm based in Lalitpur, Nepal. We
-            specialise in full-stack web development, AI integration, and
-            enterprise system design — helping organisations at every stage
-            accelerate their digital transformation with clarity and confidence.
-          </p>
-        </motion.div>
-  
         {/* Cards */}
         <div
           style={{
@@ -95,11 +174,6 @@ const About = () => {
                 overflow: "hidden",
                 cursor: "default",
               }}
-      
-              onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = "none";
-                e.currentTarget.style.borderColor = "var(--border)";
-              }}
             >
               {/* Top accent line */}
               <div
@@ -114,7 +188,7 @@ const About = () => {
                   opacity: 0.6,
                 }}
               />
-  
+
               {/* Icon */}
               <div
                 style={{
@@ -132,7 +206,7 @@ const About = () => {
               >
                 <card.Icon size={20} />
               </div>
-  
+
               {/* Label */}
               <span
                 style={{
@@ -146,7 +220,7 @@ const About = () => {
               >
                 {card.label}
               </span>
-  
+
               {/* Title */}
               <h3
                 style={{
@@ -162,7 +236,7 @@ const About = () => {
               >
                 {card.title}
               </h3>
-  
+
               {/* Desc */}
               <p
                 style={{
@@ -177,7 +251,7 @@ const About = () => {
             </motion.div>
           ))}
         </div>
-  
+
         {/* Bottom strip */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -224,14 +298,18 @@ const About = () => {
           <motion.button
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            onClick={() => navigate("/contact")}
+            onClick={() =>
+              document
+                .getElementById("contact")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
             className="btn-primary"
             style={{ whiteSpace: "nowrap", flexShrink: 0 }}
           >
             Start a Conversation
           </motion.button>
         </motion.div>
-  
+
         {/* How We Work */}
         <div
           style={{
@@ -263,18 +341,19 @@ const About = () => {
               optimized, and deployed with performance and reliability in mind.
             </p>
           </motion.div>
-  
+
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             style={{
-              padding: "2.5rem",
               background: "var(--bg-card)",
               border: "1px solid var(--border)",
-              borderRadius: "1.5rem",
+              borderRadius: "1rem",
+              padding: "2rem",
               position: "relative",
+              overflow: "hidden",
             }}
           >
             <span className="label-chip" style={{ marginBottom: "1.25rem" }}>

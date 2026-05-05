@@ -51,6 +51,7 @@ const Hero = ({ theme }) => {
               ? "linear-gradient(to bottom, rgba(5,10,20,0.7) 0%, rgba(5,10,20,0.4) 50%, rgba(5,10,20,0.85) 100%)"
               : "linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.3) 100%)",
           transition: "background 0.3s ease",
+          pointerEvents: "none",
         }}
       />
 
@@ -95,15 +96,15 @@ const Hero = ({ theme }) => {
               fontWeight: 600,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
-              color: theme === "dark" ? "rgba(147,197,253,1)" : "var(--brand)",
+              color: theme === "dark" ? "rgba(147,197,253,1)" : "#1e40af",
               background:
                 theme === "dark"
                   ? "rgba(17,24,39,0.52)"
-                  : "rgba(255,255,255,0.55)",
+                  : "rgba(255,255,255,0.75)",
               border:
                 theme === "dark"
                   ? "1px solid rgba(255,255,255,0.09)"
-                  : "1px solid rgba(255,255,255,0.75)",
+                  : "1px solid rgba(37,99,235,0.25)",
               borderRadius: "999px",
               padding: "0.3rem 1rem",
               backdropFilter: "blur(18px) saturate(1.6)",
@@ -221,14 +222,19 @@ const Hero = ({ theme }) => {
             gap: "0.875rem",
             justifyContent: "center",
             flexWrap: "wrap",
-            marginTop: "1.75rem", // Reduced from 2.25rem
+            marginTop: "1.75rem",
+            position: "relative",
+            zIndex: 10,
           }}
         >
           {/* Primary CTA — solid brand */}
           <motion.button
             whileHover={{ scale: 1.03, y: -2 }}
             whileTap={{ scale: 0.97 }}
-            onClick={() => scrollTo("features")}
+            onClick={() => {
+              const el = document.getElementById("services");
+              if (el) el.scrollIntoView({ behavior: "smooth" });
+            }}
             style={{
               display: "inline-flex",
               alignItems: "center",

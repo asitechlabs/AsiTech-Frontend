@@ -3,7 +3,7 @@ import ToolsSection from '../components/ToolsSection';
 
 const ToolsPage = () => {
   return (
-    <div style={{ paddingTop: '80px' }}>
+    <div style={{ paddingTop: '0' }}>
       <ToolsSection />
     </div>
   );

@@ -55,7 +55,7 @@ const itemVariants = {
 
 const Features = () => (
   <section
-    id="features"
+    id="services"
     className="section-pad"
     style={{ background: "var(--bg)", position: "relative" }}
   >
@@ -68,12 +68,7 @@ const Features = () => (
         transition={{ duration: 0.6 }}
         style={{ maxWidth: "600px", marginBottom: "4rem" }}
       >
-        <span
-          className="label-chip"
-          style={{ marginBottom: "1.25rem", display: "inline-flex" }}
-        >
-          What We Offer
-        </span>
+
         <h2 className="section-title" style={{ marginBottom: "1.25rem" }}>
           Services Built for
           <br />

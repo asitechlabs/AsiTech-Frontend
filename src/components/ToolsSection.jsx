@@ -31,12 +31,7 @@ const ToolsSection = () => {
           transition={{ duration: 0.6 }}
           style={{ marginBottom: "3rem" }}
         >
-          <span
-            className="label-chip"
-            style={{ marginBottom: "1.25rem", display: "inline-flex" }}
-          >
-            Technology Stack
-          </span>
+
           <div
             style={{
               display: "flex",
@@ -186,7 +181,7 @@ const ToolsSection = () => {
           </AnimatePresence>
         </motion.div>
 
-   
+
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}

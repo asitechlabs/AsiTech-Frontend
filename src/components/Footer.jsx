@@ -9,7 +9,7 @@ import {
   FiPhone,
 } from "react-icons/fi";
 
-const navLinks = ["Home", "About", "Features", "Tools", "Contact"];
+const navLinks = ["Home", "About", "Services", "Tools", "Contact"];
 const services = [
   "Web Development",
   "AI Integration",
@@ -60,6 +60,7 @@ const Footer = ({ theme }) => {
               height: "200px",
               background: "rgba(255,255,255,0.06)",
               borderRadius: "50%",
+              pointerEvents: "none",
             }}
           />
           <div>

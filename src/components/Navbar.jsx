@@ -3,7 +3,7 @@ import { Menu, Moon, Sun, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const sections = ["home", "about", "features", "tools", "contact"];
+const sections = ["home", "about", "services", "tools", "contact"];
 
 const Navbar = ({ theme, toggleTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -113,14 +113,14 @@ const Navbar = ({ theme, toggleTheme }) => {
               }}
             >
               <img
-                src="/logo.png"
+                src="https://scontent.fjkr2-1.fna.fbcdn.net/v/t39.30808-6/652354329_122119029831182352_7674516002346519096_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=l_y4Yl2-hzsQ7kNvwH7M6il&_nc_oc=AdpgkyHOMY24RMltKkwgz3_QpECSLshAT1SniX9Yp2gL3JIwzf-TS91mhHOggwVwews&_nc_zt=23&_nc_ht=scontent.fjkr2-1.fna&_nc_gid=UpvDZ1FLqfkrxeH8yoHEGg&_nc_ss=7b2a8&oh=00_Af3IvMg4D8fkPmlxZh5-s0sJhER7M3vjQ46t-ikMqeM_iQ&oe=69F8AB0F"
                 alt="AsiTech"
                 style={{
                   height: "36px",
                   width: "36px",
                   borderRadius: "8px",
                   objectFit: "cover",
-                  background: theme === "dark" ? "white" : "transparent",
+                  background: theme === "light" ? "transparent" : "white",
                   transform: theme === "light" ? "translateY(-5px)" : "none",
                 }}
               />
@@ -129,7 +129,7 @@ const Navbar = ({ theme, toggleTheme }) => {
                 style={{
                   fontSize: "1.6rem",
                   fontWeight: 700,
-                  color: "var(--text-primary)",
+                  color: theme === "light" ? "#000" : "var(--text-primary)",
                   letterSpacing: "-0.02em",
                   fontFamily: "var(--font-heading)",
                   transition: "color 0.3s ease",
@@ -159,7 +159,7 @@ const Navbar = ({ theme, toggleTheme }) => {
                     color:
                       activeSection === sec
                         ? "var(--brand)"
-                        : "var(--text-secondary)",
+                        : theme === "light" ? "#000" : "var(--text-primary)",
                     fontFamily: "var(--font-heading)",
                     borderRadius: "6px",
                     transition: "color 0.2s ease",
@@ -167,11 +167,11 @@ const Navbar = ({ theme, toggleTheme }) => {
                   className="nav-btn"
                   onMouseEnter={(e) => {
                     if (activeSection !== sec)
-                      e.currentTarget.style.color = "var(--text-primary)";
+                      e.currentTarget.style.color = theme === "light" ? "#000" : "var(--text-primary)";
                   }}
                   onMouseLeave={(e) => {
                     if (activeSection !== sec)
-                      e.currentTarget.style.color = "var(--text-secondary)";
+                      e.currentTarget.style.color = theme === "light" ? "#000" : "var(--text-primary)";
                   }}
                 >
                   {sec.charAt(0).toUpperCase() + sec.slice(1)}
@@ -198,11 +198,11 @@ const Navbar = ({ theme, toggleTheme }) => {
                   justifyContent: "center",
                   width: "36px",
                   height: "36px",
-                  /* ── Glass surface on the icon button ── */
-                  background: "var(--glass-bg)",
-                  border: "1px solid var(--glass-border)",
-                  backdropFilter: "var(--glass-blur)",
-                  WebkitBackdropFilter: "var(--glass-blur)",
+                  /* ── Clean icon button ── */
+                  background: "none",
+                  border: "none",
+                  backdropFilter: "none",
+                  WebkitBackdropFilter: "none",
                   borderRadius: "8px",
                   cursor: "pointer",
                   color: "var(--text-secondary)",
@@ -241,11 +241,11 @@ const Navbar = ({ theme, toggleTheme }) => {
                   justifyContent: "center",
                   width: "36px",
                   height: "36px",
-                  /* ── Glass surface on mobile theme toggle ── */
-                  background: "var(--glass-bg)",
-                  border: "1px solid var(--glass-border)",
-                  backdropFilter: "var(--glass-blur)",
-                  WebkitBackdropFilter: "var(--glass-blur)",
+                  /* ── Clean mobile theme toggle ── */
+                  background: "none",
+                  border: "none",
+                  backdropFilter: "none",
+                  WebkitBackdropFilter: "none",
                   borderRadius: "8px",
                   cursor: "pointer",
                   color: "var(--text-secondary)",
@@ -262,14 +262,14 @@ const Navbar = ({ theme, toggleTheme }) => {
                   justifyContent: "center",
                   width: "36px",
                   height: "36px",
-                  /* ── Glass surface on mobile hamburger ── */
-                  background: "var(--glass-bg)",
-                  border: "1px solid var(--glass-border)",
-                  backdropFilter: "var(--glass-blur)",
-                  WebkitBackdropFilter: "var(--glass-blur)",
+                  /* ── Clean mobile hamburger ── */
+                  background: "none",
+                  border: "none",
+                  backdropFilter: "none",
+                  WebkitBackdropFilter: "none",
                   borderRadius: "8px",
                   cursor: "pointer",
-                  color: "var(--text-primary)",
+                  color: theme === "light" ? "#000" : "var(--text-primary)",
                 }}
               >
                 {isOpen ? <X size={18} /> : <Menu size={18} />}
@@ -323,7 +323,7 @@ const Navbar = ({ theme, toggleTheme }) => {
                   color:
                     activeSection === sec
                       ? "var(--brand)"
-                      : "var(--text-secondary)",
+                      : theme === "light" ? "#000" : "var(--text-primary)",
                   fontFamily: "var(--font-heading)",
                   cursor: "pointer",
                   transition: "color 0.3s ease",
