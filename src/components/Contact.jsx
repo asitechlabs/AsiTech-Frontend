@@ -2,6 +2,7 @@ import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import { Contact2, Mail, MapPin, Phone, Send, CheckCircle, XCircle } from "lucide-react";
 import { useState } from "react";
+import { FaWhatsapp, FaViber } from "react-icons/fa";
 
 const mapSrc =
   "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d220.841674042465!2d85.30071020436857!3d27.671964377869376!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x42a69446721c7583%3A0xb6e603b7d680cd4e!2sAsi%20Tech!5e0!3m2!1sen!2snp!4v1777544297101!5m2!1sen!2snp";
@@ -116,12 +117,12 @@ const Contact = () => {
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
             gap: "2rem",
-            alignItems: "start",
+            alignItems: "stretch",
           }}
         >
           {/* LEFT: contact info + map */}
           <div
-            style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
+            style={{ display: "flex", flexDirection: "column", gap: "1.5rem", height: "100%" }}
           >
             {/* Contact details */}
             <motion.div
@@ -134,6 +135,9 @@ const Contact = () => {
                 border: "1px solid var(--border)",
                 borderRadius: "1rem",
                 padding: "1.75rem",
+                flex: 1,
+                display: "flex",
+                flexDirection: "column",
               }}
             >
               <h3
@@ -209,6 +213,62 @@ const Contact = () => {
                   </a>
                 ))}
               </div>
+
+              {/* Chat options */}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "1.5rem",
+                  marginTop: "auto",
+                  paddingTop: "2rem",
+                }}
+              >
+                <a
+                  href="https://wa.me/9779768552107"
+                  target="_blank"
+                  rel="noreferrer"
+                  title="Chat on WhatsApp"
+                  style={{
+                    color: "var(--text-tertiary)",
+                    transition: "all 0.2s ease",
+                    display: "flex",
+                    alignItems: "center",
+                    textDecoration: "none",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = "#25D366";
+                    e.currentTarget.style.transform = "scale(1.15)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = "var(--text-tertiary)";
+                    e.currentTarget.style.transform = "scale(1)";
+                  }}
+                >
+                  <FaWhatsapp size={24} />
+                </a>
+                <a
+                  href="viber://chat?number=9779768552107"
+                  title="Chat on Viber"
+                  style={{
+                    color: "var(--text-tertiary)",
+                    transition: "all 0.2s ease",
+                    display: "flex",
+                    alignItems: "center",
+                    textDecoration: "none",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = "#7360f2";
+                    e.currentTarget.style.transform = "scale(1.15)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = "var(--text-tertiary)";
+                    e.currentTarget.style.transform = "scale(1)";
+                  }}
+                >
+                  <FaViber size={24} />
+                </a>
+              </div>
             </motion.div>
 
             {/* Map */}
@@ -221,7 +281,8 @@ const Contact = () => {
                 borderRadius: "1rem",
                 overflow: "hidden",
                 border: "1px solid var(--border)",
-                height: "240px",
+                flex: 1,
+                minHeight: "240px",
               }}
             >
               <iframe

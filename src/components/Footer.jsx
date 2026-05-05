@@ -140,6 +140,7 @@ const Footer = ({ theme }) => {
                   borderRadius: "6px",
                   objectFit: "cover",
                   background: theme === "dark" ? "white" : "transparent",
+                  transform: theme === "light" ? "translateY(-5px)" : "none",
                 }}
               />
               <span
