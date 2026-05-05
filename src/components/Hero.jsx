@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 const SERVICES = [
@@ -12,6 +13,7 @@ const SERVICES = [
 
 const Hero = ({ theme }) => {
   const [serviceIndex, setServiceIndex] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const svcTimer = setInterval(() => {
@@ -250,7 +252,7 @@ const Hero = ({ theme }) => {
           <motion.button
             whileHover={{ scale: 1.03, y: -2 }}
             whileTap={{ scale: 0.97 }}
-            onClick={() => scrollTo("contact")}
+            onClick={() => navigate("/contact")}
             style={{
               display: "inline-flex",
               alignItems: "center",

@@ -1,15 +1,16 @@
 import { motion } from "framer-motion";
 import {
-    ArrowRight,
-    BarChart2,
-    CheckCircle,
-    Code2,
-    Database,
-    GitBranch,
-    Layers,
-    Lock,
-    Server,
+  ArrowRight,
+  BarChart2,
+  CheckCircle,
+  Code2,
+  Database,
+  GitBranch,
+  Layers,
+  Lock,
+  Server,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 /* ─── Data ─────────────────────────────────────────────────── */
@@ -93,6 +94,7 @@ const integrations = [
 /* ─── Component ─────────────────────────────────────────────── */
 const Systems = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const navigate = useNavigate();
 
   return (
     <div
@@ -147,11 +149,7 @@ const Systems = () => {
             <div style={{ display: "flex", gap: "0.875rem", flexWrap: "wrap" }}>
               <button
                 className="btn-primary"
-                onClick={() =>
-                  document
-                    .getElementById("contact")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
+                onClick={() => navigate("/contact")}
               >
                 Discuss Your System <ArrowRight size={15} />
               </button>
@@ -489,11 +487,7 @@ const Systems = () => {
             </div>
             <button
               className="btn-primary"
-              onClick={() =>
-                document
-                  .getElementById("contact")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
+              onClick={() => navigate("/contact")}
               style={{ whiteSpace: "nowrap", flexShrink: 0 }}
             >
               Talk to an Engineer <ArrowRight size={15} />

@@ -1,6 +1,6 @@
 import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
-import { Contact2, Mail, MapPin, Phone, Send } from "lucide-react";
+import { Contact2, Mail, MapPin, Phone, Send, CheckCircle, XCircle } from "lucide-react";
 import { useState } from "react";
 
 const mapSrc =
@@ -364,9 +364,15 @@ const Contact = () => {
                     color: status === "success" ? "#16a34a" : "#dc2626",
                   }}
                 >
-                  {status === "success"
-                    ? "✓ Message sent successfully. We'll be in touch shortly."
-                    : "✕ Something went wrong. Please try again or email us directly."}
+                  {status === "success" ? (
+                    <span style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                      <CheckCircle size={16} /> Message sent successfully. We'll be in touch shortly.
+                    </span>
+                  ) : (
+                    <span style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                      <XCircle size={16} /> Something went wrong. Please try again or email us directly.
+                    </span>
+                  )}
                 </motion.div>
               )}
 

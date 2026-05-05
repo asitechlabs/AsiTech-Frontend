@@ -58,7 +58,7 @@ const App = () => {
       )}
 
       <Navbar theme={theme} toggleTheme={toggleTheme} />
-      
+
       <Routes>
         <Route path="/" element={<Home theme={theme} />} />
         <Route path="/about" element={<AboutPage />} />
@@ -67,7 +67,7 @@ const App = () => {
         <Route path="/contact" element={<ContactPage />} />
       </Routes>
 
-      <Footer />
+      <Footer theme={theme} />
       <ScrollToTopButton />
     </div>
   );

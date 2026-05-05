@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { BarChart3, Cloud, Cpu, Globe, ShieldCheck, Zap } from "lucide-react";
+import { BarChart3, Cloud, Cpu, Globe, ShieldCheck, Zap, Truck, CreditCard, Lock, Package } from "lucide-react";
 
 const features = [
   {
@@ -195,6 +195,120 @@ const Features = () => (
           </motion.div>
         ))}
       </motion.div>
+
+      {/* Advanced System Capabilities */}
+      <div style={{ marginTop: "8rem" }}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          style={{ maxWidth: "600px", marginBottom: "4rem" }}
+        >
+          <span className="label-chip" style={{ marginBottom: "1.25rem" }}>
+            Advanced Systems
+          </span>
+          <h2 className="section-title" style={{ marginBottom: "1.25rem" }}>
+            Advanced System
+            <br />
+            Capabilities
+          </h2>
+        </motion.div>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gap: "1.5rem",
+          }}
+        >
+          {[
+            {
+              title: "Logistics Optimization",
+              desc: "Real-time shipping cost calculation, carrier comparison, and intelligent logistics optimization based on cost and performance.",
+              Icon: Truck,
+            },
+            {
+              title: "Payment Processing",
+              desc: "Multi-gateway payment processing with secure transaction handling and robust financial integration.",
+              Icon: CreditCard,
+            },
+            {
+              title: "Access Control",
+              desc: "Granular role-based access control (RBAC) for secure, tiered system management and data protection.",
+              Icon: Lock,
+            },
+            {
+              title: "Inventory Management",
+              desc: "Multi-warehouse inventory tracking and management systems designed for complex supply chains.",
+              Icon: Package,
+            },
+            {
+              title: "Business Analytics",
+              desc: "Integrated analytics and reporting dashboards for data-driven business insights and forecasting.",
+              Icon: BarChart3,
+            },
+            {
+              title: "System Security",
+              desc: "Enterprise-grade security protocols ensuring data integrity and protection against modern threats.",
+              Icon: ShieldCheck,
+            },
+          ].map((item, i) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="card-glass"
+              style={{
+                padding: "2rem",
+                display: "flex",
+                flexDirection: "column",
+                gap: "1rem",
+              }}
+            >
+              <div
+                style={{
+                  width: "48px",
+                  height: "48px",
+                  background: "var(--brand-dim)",
+                  border: "1px solid var(--brand-mid)",
+                  borderRadius: "12px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "var(--brand)",
+                }}
+              >
+                <item.Icon size={24} />
+              </div>
+              <div>
+                <h3
+                  style={{
+                    fontSize: "1.125rem",
+                    fontWeight: 600,
+                    color: "var(--text-primary)",
+                    marginBottom: "0.5rem",
+                  }}
+                >
+                  {item.title}
+                </h3>
+                <p
+                  style={{
+                    fontSize: "0.9rem",
+                    lineHeight: 1.6,
+                    color: "var(--text-secondary)",
+                    margin: 0,
+                  }}
+                >
+                  {item.desc}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
     </div>
   </section>
 );

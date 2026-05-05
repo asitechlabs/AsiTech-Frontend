@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
+import { Settings, Link as LinkIcon, Printer, Package, Store, TrendingUp } from "lucide-react";
 import { toolUsed } from "../data/Tool";
 
 const categories = [
@@ -238,6 +239,124 @@ const ToolsSection = () => {
             </span>
           ))}
         </motion.div>
+        {/* System Tools & Engines */}
+        <div style={{ marginTop: "6rem" }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            style={{ marginBottom: "3rem" }}
+          >
+            <span className="label-chip" style={{ marginBottom: "1.25rem" }}>
+              Core Infrastructure
+            </span>
+            <h2 className="section-title" style={{ marginBottom: "0.875rem" }}>
+              System Tools & Engines
+            </h2>
+            <p className="section-subtitle">
+              Specialized backend engines and management systems powering complex
+              business operations and automated workflows.
+            </p>
+          </motion.div>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+              gap: "1.25rem",
+            }}
+          >
+            {[
+              {
+                title: "Shipping Rate Calculation Engine",
+                desc: "High-performance engine for real-time rate retrieval and logistics rule enforcement.",
+                Icon: Settings,
+              },
+              {
+                title: "Multi-Carrier Integration System",
+                desc: "Unified interface for connecting with global and local shipping carriers seamlessly.",
+                Icon: LinkIcon,
+              },
+              {
+                title: "Label Generation & Printing Engine",
+                desc: "Automated generation of shipping labels, invoices, and thermal print-ready documents.",
+                Icon: Printer,
+              },
+              {
+                title: "Order & Package Management",
+                desc: "Robust system for tracking order lifecycles from placement to final delivery.",
+                Icon: Package,
+              },
+              {
+                title: "Vendor & Marketplace Tools",
+                desc: "Management dashboards for multi-vendor onboarding, product sync, and payouts.",
+                Icon: Store,
+              },
+              {
+                title: "Analytics & Reporting Dashboard",
+                desc: "Real-time visibility into system performance, business metrics, and operational health.",
+                Icon: TrendingUp,
+              },
+            ].map((tool, i) => (
+              <motion.div
+                key={tool.title}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                whileHover={{ y: -5 }}
+                className="card-glass"
+                style={{
+                  padding: "2rem",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "1rem",
+                  cursor: "default",
+                }}
+              >
+                <div
+                  style={{
+                    width: "48px",
+                    height: "48px",
+                    background: "var(--brand-dim)",
+                    border: "1px solid var(--brand-mid)",
+                    borderRadius: "12px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "var(--brand)",
+                  }}
+                >
+                  <tool.Icon size={24} />
+                </div>
+                <div>
+                  <h3
+                    style={{
+                      fontSize: "1.25rem",
+                      fontWeight: 600,
+                      color: "var(--text-primary)",
+                      marginBottom: "0.5rem",
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {tool.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: "0.9375rem",
+                      lineHeight: 1.6,
+                      color: "var(--text-secondary)",
+                      margin: 0,
+                    }}
+                  >
+                    {tool.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
